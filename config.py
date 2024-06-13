@@ -9,5 +9,6 @@ MYSQL_HOST = 'localhost'
 MYSQL_USER = 'root'
 MYSQL_PASSWORD = os.getenv("MYSQL_PASSWORD","")
 MYSQL_DB = os.getenv("MYSQL_DB","")
+HEX_SEC_KEY= os.getenv("HEX_SEC_KEY","12345")
 
 

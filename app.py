@@ -50,11 +50,17 @@ def login():
     else: 
         return render_template('index.html',message="Usuario o contraseña incorrectos")
     
-
 # TODO RUTA TURNOS
 @app.route('/turnos', methods=['GET'])
 def turnos():
     return render_template('turnos.html')
+
+
+# TODO RUTA LOGOUT
+@app.route('/logout')
+def logout():
+    session.clear() # cierra la sesion del usuario
+    return redirect(url_for('home'))
 
 
 

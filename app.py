@@ -1,7 +1,11 @@
 # entrada a la aplicacion
-from flask import Flask, redirect, render_template, request, session, url_for
+from flask import Flask, flash, redirect, render_template, request, session, url_for
 import config
 from flask_mysqldb import MySQL #paquete conexion de  MYSQL
+
+# from models.clientes import Cliente
+
+from models.profesionales import Profesional
 
 #--------------------------------------------------------------------------------------------------------------------------
 #*                                        app y su conexion la DB                                          
@@ -16,7 +20,6 @@ app.config["MYSQL_HOST"] = config.MYSQL_HOST
 app.config["MYSQL_USER"] = config.MYSQL_USER
 app.config["MYSQL_PASSWORD"] = config.MYSQL_PASSWORD
 app.config["MYSQL_DB"] = config.MYSQL_DB
-
 
 
 #--------------------------------------------------------------------------------------------------------------------------
@@ -53,7 +56,9 @@ def login():
 # TODO RUTA TURNOS
 @app.route('/turnos', methods=['GET'])
 def turnos():
-    return render_template('turnos.html')
+    #instancia de la clase profesionales
+    profesionales = Profesional.get_profesionales(mysql)
+    return render_template('turnos.html',profesionales=profesionales)
 
 
 # TODO RUTA LOGOUT
@@ -64,12 +69,23 @@ def logout():
 
 
 # TODO RUTA NEW CLIENTE
-@app.route('/new-cliente', methods=['GET'])
+@app.route('/new-cliente', methods=['GET', 'POST'])
 def new_cliente():
+    if request.method == 'POST': # si se envia el formulario
+        nombre = request.form.get('nombre') # obtiene nombre del formulario
+        email = request.form.get('email') # obtiene email del formulario
+        telefono = request.form.get('telefono') # obtiene telefono del formulario
+        password = request.form.get('password')# obtiene password del formulario
+        if nombre and email and telefono and password: # si todos los campos estan completos
+            cur = mysql.connection.cursor() #llamado la la base de datos
+            cur.execute("INSERT INTO clientes (nombre, email, telefono, password) VALUES (%s, %s, %s, %s)", (nombre, email, telefono, password))#consulta sql
+            mysql.connection.commit()# confirmacion del sql
+            cur.close() #cierre 
+            flash('Usuario registrado correctamente', 'success')  # Añade el mensaje flash
+            return redirect(url_for('new_cliente'))  # Redirige a la misma página para mostrar el mensaje
     return render_template('new-cliente.html')
-
-
-
+    
+   
 #================================================
 # El objeto session en Flask (o frameworks similares) 
 # es un diccionario que persiste datos entre las solicitudes del mismo usuario. 
@@ -77,6 +93,10 @@ def new_cliente():
 # otros datos específicos del usuario mientras navega por 
 # diferentes páginas de la aplicación.               
 #================================================
+
+
+
+
 
 
 

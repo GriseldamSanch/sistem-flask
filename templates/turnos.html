@@ -15,8 +15,30 @@
             <span>Bienvenido/a {{session['name']}}<a href="{{url_for('logout')}}" class="mx-3">Logout</a></span>
         </div>
     </nav>
+  <h1>Pedi tu turno</h1>
 
-    <h1>bienvenido sistema de turnos</h1>
+  <h2>Profesionales Disponibles</h2>
+    <table class="table table-dark table-striped w-50">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Especialidad</th>
+                <th>Disponibilidad</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for profesional in profesionales %}
+            <tr>
+                <td>{{ profesional.nombre }}</td>
+                <td>{{ profesional.especialidad }}</td>
+                <td>{{ profesional.disponibilidad }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+
 
 
     

@@ -18,6 +18,18 @@
     </nav>
 
 
+        <!-- Mostrar mensajes flash -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="alert alert-success alert-dismissible fade show w-40" role="alert">
+                {% for category, message in messages %}
+                    <strong>{{ message }}</strong>
+                {% endfor %}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endif %}
+    {% endwith %}
+
 
         <!-- d-flex centra el contenedor -->
         <main class="d-flex">
@@ -27,32 +39,40 @@
                 <div class="card shadow w-50">
                     <div class="card-body">
                         <!-- formulario -->
-                        <!-- action="/login  en esa ruta se envia los datos" -->
-                        <form action="/login" method="post">
+                        <!-- action="/new-cliente  en esa ruta se envia los datos" -->
+                        <form action="/new-cliente" method="post">
                             <h4 class="text-center">💅🏻 Nails Pro 💅🏻</h4>
-                            <h5 class="text-center">Registrate</h5>
-                            <!-- campo email -->
-                            <label for="">Email</label>
-                           <input type="email" class="form-control mb-3" name="email">
-                           <!--campo telefono  -->
-                           <label for="">Telefono</label>
-                           <input type="tel" class="form-control mb-3" name="tel">
-                           <!--campo password  -->
-                           <label for="">Contraseña</label>
-                           <input type="password" class="form-control mb-3" name="password">
-
-
-                           {% if message %}
-                           <div class="alert alert-danger alert-dismissible fade show" role="alert" >
-                             <!-- mensaje: Usuario o contraseña incorrectos  -->
-                            <strong>Error </strong>{{message}}
-                            <!-- boton cerrar -->
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                           </div>
-                           {% endif %}
-                           <!-- boton -->
-                           <button type="submit" class="btn btn-primary w-100">Acceder</button>
+                            <h5 class="text-center">Regístrate</h5>
+                            
+                            <!-- Campo nombre de usuario -->
+                            <label for="nombre">Nombre</label>
+                            <input type="text" class="form-control mb-3" name="nombre" placeholder="Nombre o usuario" required>
+                            
+                            <!-- Campo email -->
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control mb-3" name="email" placeholder="Email" required>
+                            
+                            <!-- Campo teléfono -->
+                            <label for="telefono">Teléfono</label>
+                            <input type="tel" class="form-control mb-3" name="telefono" placeholder="(011)____-____" required>
+                            
+                            <!-- Campo contraseña -->
+                            <label for="password">Contraseña</label>
+                            <input type="password" class="form-control mb-3" name="password" placeholder="Contraseña" required>
+                            
+                            {% if message %}
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <!-- mensaje: Usuario o contraseña incorrectos -->
+                                <strong>Error</strong> {{message}}
+                                <!-- Botón cerrar -->
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                            {% endif %}
+                            
+                            <!-- Botón -->
+                            <button type="submit" class="btn btn-primary w-100">Acceder</button>
                         </form>
+                        
                     </div>
                 </div>
             </div>

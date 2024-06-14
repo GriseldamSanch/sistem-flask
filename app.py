@@ -63,6 +63,11 @@ def logout():
     return redirect(url_for('home'))
 
 
+# TODO RUTA NEW CLIENTE
+@app.route('/new-cliente', methods=['GET'])
+def new_cliente():
+    return render_template('new-cliente.html')
+
 
 
 #================================================

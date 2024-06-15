@@ -60,22 +60,21 @@ def getProfesionales():
     profesionales = Profesional.get_profesionales(mysql)
     return render_template('getProfesionales.html',profesionales=profesionales)
 
-#TODO  RUTA MOSTRAR CALENDARIO Y TURNOS DE UN PROFESIONAL
 
+#TODO  RUTA MOSTRAR CALENDARIO Y TURNOS DE UN PROFESIONAL
 @app.route('/profesionales/<int:profesional_id>', methods=['GET'])
 def calendar_profesional(profesional_id):
     profesional = Profesional.obtener_por_id(mysql,profesional_id) #obtiene el profesional por id
     turnos = Profesional.obtener_turnos(mysql,profesional_id) #obtiene los turnos del profesional
     return render_template('calendarProf.html', profesional=profesional, turnos=turnos)
+# aqui debe ir el calendario reservar turno.
+
+
+
 
 #TODO   RUTA AGREGAR TURNO
 @app.route('/profesionales/<int:profesional_id>/turnos', methods=['POST'])
 def add_turno(profesional_id):
-    #*verificar  que el usuario este logueado
-    if not session.get('email'):
-        flash('Debes iniciar sesion para reservar un turno')
-        return redirect(url_for('login'))
-    
     #*datos del formulario
     fecha = request.form.get('fecha')
     hora_inicio = request.form.get('horaInicio')
@@ -117,9 +116,6 @@ def add_turno(profesional_id):
 
     flash("Turno reservado exitosamente.", "success")
     return redirect(url_for('calendar_profesional', profesional_id=profesional_id))
-
-
-
 
 
 # TODO RUTA LOGOUT

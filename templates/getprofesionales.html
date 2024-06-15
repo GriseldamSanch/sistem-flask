@@ -18,7 +18,35 @@
   <h1>Pedi tu turno</h1>
 
   <h2>Profesionales Disponibles</h2>
-    <table class="table table-dark table-striped w-50">
+
+
+  <div class="container">
+    <h1>Profesionales</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Especialidad</th>
+                <th>Disponibilidad</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for profesional in profesionales %}
+            <tr>
+                <td>{{ profesional.nombre }}</td>
+                <td>{{ profesional.especialidad }}</td>
+                <td>{{ profesional.disponibilidad }}</td>
+                <td>
+                    <a href="{{ url_for('calendar_profesional', profesional_id=profesional.id) }}" class="btn btn-primary">Ver Calendario</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+    <!-- <table class="table table-dark table-striped w-50">
         <thead>
             <tr>
                 <th>Nombre</th>
@@ -35,7 +63,7 @@
             </tr>
             {% endfor %}
         </tbody>
-    </table>
+    </table> -->
 
 
 

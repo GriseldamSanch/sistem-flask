@@ -49,16 +49,77 @@ def login():
         session["password"] = password
         session["nombre"] = user[1]
         
-        return redirect(url_for('turnos')) #si coinciden los datos de la consulta, redirige a la ruta turnos
+        return redirect(url_for('getProfesionales')) #si coinciden los datos de la consulta, redirige a la ruta turnos
     else: 
         return render_template('index.html',message="Usuario o contraseña incorrectos")
     
-# TODO RUTA TURNOS
-@app.route('/turnos', methods=['GET'])
-def turnos():
+# TODO RUTA VER PROFESIONALES 
+@app.route('/profesionales', methods=['GET'])
+def getProfesionales():
     #instancia de la clase profesionales
     profesionales = Profesional.get_profesionales(mysql)
-    return render_template('turnos.html',profesionales=profesionales)
+    return render_template('getProfesionales.html',profesionales=profesionales)
+
+#TODO  RUTA MOSTRAR CALENDARIO Y TURNOS DE UN PROFESIONAL
+
+@app.route('/profesionales/<int:profesional_id>', methods=['GET'])
+def calendar_profesional(profesional_id):
+    profesional = Profesional.obtener_por_id(mysql,profesional_id) #obtiene el profesional por id
+    turnos = Profesional.obtener_turnos(mysql,profesional_id) #obtiene los turnos del profesional
+    return render_template('calendarProf.html', profesional=profesional, turnos=turnos)
+
+#TODO   RUTA AGREGAR TURNO
+@app.route('/profesionales/<int:profesional_id>/turnos', methods=['POST'])
+def add_turno(profesional_id):
+    #*verificar  que el usuario este logueado
+    if not session.get('email'):
+        flash('Debes iniciar sesion para reservar un turno')
+        return redirect(url_for('login'))
+    
+    #*datos del formulario
+    fecha = request.form.get('fecha')
+    hora_inicio = request.form.get('horaInicio')
+    hora_fin = request.form.get('horaFin')
+    estado = request.form.get('estado')
+    cliente_id = request.form.get('cliente_id')
+    # Profesional.agregar_turno(mysql,profesional_id,fecha,hora_inicio,hora_fin,estado,cliente_id)
+    # return redirect(url_for('calendar_profesional',profesional_id=profesional_id))
+
+    #* verificar si el turno este disponible
+    cur = mysql.connection.cursor()
+    cur.execute("""
+        SELECT id, estado FROM turnos
+        WHERE profesional_id = %s AND fecha = %s AND hora_inicio = %s AND hora_fin = %s
+    """, (profesional_id, fecha, hora_inicio, hora_fin))
+    turno_existente = cur.fetchone()
+
+    if turno_existente:
+        if turno_existente[1] == 'reservado':
+            flash("Este turno ya ha sido reservado por otra persona.", "error")
+            cur.close()
+            return redirect(url_for('calendar_profesional', profesional_id=profesional_id))
+        else:
+            # Actualizar el turno a reservado
+            cur.execute("""
+                UPDATE turnos
+                SET estado = %s, cliente_id = %s
+                WHERE id = %s
+            """, ('reservado', cliente_id, turno_existente[0]))
+    else:
+        # Insertar un nuevo turno si no existe uno para ese horario
+        cur.execute("""
+            INSERT INTO turnos (profesional_id, fecha, hora_inicio, hora_fin, estado, cliente_id)
+            VALUES (%s, %s, %s, %s, %s, %s)
+        """, (profesional_id, fecha, hora_inicio, hora_fin, 'reservado', cliente_id))
+    
+    mysql.connection.commit()
+    cur.close()
+
+    flash("Turno reservado exitosamente.", "success")
+    return redirect(url_for('calendar_profesional', profesional_id=profesional_id))
+
+
+
 
 
 # TODO RUTA LOGOUT
@@ -86,14 +147,6 @@ def new_cliente():
     return render_template('new-cliente.html')
     
    
-#================================================
-# El objeto session en Flask (o frameworks similares) 
-# es un diccionario que persiste datos entre las solicitudes del mismo usuario. 
-# Esto es crucial para mantener el estado de autenticación y 
-# otros datos específicos del usuario mientras navega por 
-# diferentes páginas de la aplicación.               
-#================================================
-
 
 
 

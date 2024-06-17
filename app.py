@@ -25,11 +25,14 @@ app.config["MYSQL_DB"] = config.MYSQL_DB
 #--------------------------------------------------------------------------------------------------------------------------
 #*                                                  RUTAS
 #--------------------------------------------------------------------------------------------------------------------------
-
+""""
+ruta home renderiza la plantilla index.html
+"""
 # todo   RUTA HOME
 @app.route('/', methods=['GET']) 
 def home():
     return render_template('index.html')
+
 
 #TODO RUTA LOGIN
 @app.route('/login', methods=['POST']) 
@@ -53,6 +56,7 @@ def login():
     else: 
         return render_template('index.html',message="Usuario o contraseña incorrectos")
     
+
 # TODO RUTA VER PROFESIONALES 
 @app.route('/profesionales', methods=['GET'])
 def getProfesionales():
@@ -70,10 +74,8 @@ def calendar_profesional(profesional_id):
 # aqui debe ir el calendario reservar turno.
 
 
-
-
 #TODO   RUTA AGREGAR TURNO
-@app.route('/profesionales/<int:profesional_id>/turnos', methods=['POST'])
+@app.route('/profesionales/<int:profesional_id>', methods=['POST'])
 def add_turno(profesional_id):
     #*datos del formulario
     fecha = request.form.get('fecha')

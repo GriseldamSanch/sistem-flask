@@ -8,110 +8,58 @@
     <title>Nails Pro 💅🏻</title>
 </head>
 <body>
-     <!-- navbar con nombre de usuario y opcion salir -->
-     <nav class="navbar navbar-expand-lg bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand fw-bolder" href="#">💅🏻 Nails Pro 💅🏻</a>
-            <span>Bienvenido/a {{session['name']}}<a href="{{url_for('logout')}}" class="mx-3">Logout</a></span>
-        </div>
-    </nav>
-    <main>
+    
+     <!-- Mensajes flash -->
+     {% with messages = get_flashed_messages(with_categories=true) %}
+     {% if messages %}
+         <div class="alerts">
+             {% for category, message in messages %}
+                 <div class="alert alert-{{ category }}">
+                     {{ message }}
+                 </div>
+             {% endfor %}
+         </div>
+     {% endif %}
+ {% endwith %}
 
-    <h1>Turnos para {{ profesional.nombre }}</h1>
-    <h2>Especialidad: {{ profesional.especialidad }}</h2>
-    <h3>Disponibilidad: {{ profesional.disponibilidad }}</h3>
-
-    <!-- Tabla de turnos disponibles -->
-    <table border="1">
+    <h1>Calendario del Profesional</h1>
+    <table>
         <thead>
             <tr>
-                <th>Fecha</th>
+                <th>ID</th>
                 <th>Hora Inicio</th>
                 <th>Hora Fin</th>
                 <th>Estado</th>
-                <th>Acción</th>
+                <th>ID Cliente</th>
+                <th>Fecha</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
             {% for turno in turnos %}
-                <tr>
-                    <td>{{ turno.fecha }}</td>
-                    <td>{{ turno.hora_inicio }}</td>
-                    <td>{{ turno.hora_fin }}</td>
-                    <td>{{ turno.estado }}</td>
-                    <td>
-                        {% if turno.estado == 'disponible' %}
-                            <form method="POST" action="{{ url_for('add_turno', profesional_id=profesional.id) }}">
-                                <input type="hidden" name="fecha" value="{{ turno.fecha }}">
-                                <input type="hidden" name="horaInicio" value="{{ turno.hora_inicio }}">
-                                <input type="hidden" name="horaFin" value="{{ turno.hora_fin }}">
-                                <input type="hidden" name="estado" value="reservado">
-                                <input type="hidden" name="cliente_id" value="{{ session['user_id'] }}">
-                                <button type="submit">Reservar</button>
-                            </form>
-                        {% else %}
-                            Reservado
-                        {% endif %}
-                    </td>
-                </tr>
+            <tr>
+                <td>{{ turno[0] }}</td>
+                <td>{{ turno[1] }}</td>
+                <td>{{ turno[2] }}</td>
+                <td>{{ turno[3] }}</td>
+                <td>{{ turno[4] }}</td>
+                <td>{{ turno[5] }}</td>
+                <td>
+                    <form method="post" action="{{ url_for('calendar_profesional', profesional_id=profesional_id) }}">
+                        <input type="hidden" name="turno_id" value="{{ turno[0] }}">
+                        <label for="nuevo_estado_{{ turno[0] }}">Estado:</label>
+                        <select id="nuevo_estado_{{ turno[0] }}" name="nuevo_estado" required>
+                            <option value="disponible" {% if turno[3] == 'disponible' %}selected{% endif %}>Disponible</option>
+                            <option value="reservado" {% if turno[3] == 'reservado' %}selected{% endif %}>Reservado</option>
+                        </select>
+                        <label for="nueva_fecha_{{ turno[0] }}">Fecha:</label>
+                        <input type="date" id="nueva_fecha_{{ turno[0] }}" name="nueva_fecha" value="{{ turno[5] }}" required>
+                        <button type="submit">Actualizar</button>
+                    </form>
+                </td>
+            </tr>
             {% endfor %}
         </tbody>
     </table>
-<!-- formulario de turnos -->
-    <div class="container-turnos">
-        <div class="container">
-            <h2 class="mt-5">Formulario de Citas</h2>
-            <form action="{{ url_for('add_turno', profesional_id=profesional.id) }}" method="post">
-                <div class="form-group">
-                    <label for="fecha">Fecha</label>
-                    <input type="date" class="form-control" id="fecha" name="fecha" required>
-                </div>
-                <div class="form-group">
-                    <label for="horaInicio">Hora de Inicio</label>
-                    <input type="time" class="form-control" id="horaInicio" name="horaInicio" required>
-                </div>
-                <div class="form-group">
-                    <label for="horaFin">Hora de Fin</label>
-                    <input type="time" class="form-control" id="horaFin" name="horaFin" required>
-                </div>
-                <div class="form-group">
-                    <label for="estado">Estado</label>
-                    <input type="text" class="form-control" id="estado" name="estado" required>
-                </div>
-                <div class="form-group">
-                    <label for="cliente_id">ID del Cliente</label>
-                    <input type="number" class="form-control" id="cliente_id" name="cliente_id" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Enviar</button>
-            </form>
-        </div>
-
-    
-
-
-
-
-
-
-
-
-
-    </div>
-
-
-
-    <a href="{{ url_for('getProfesionales') }}">Volver a Profesionales</a>
-
-
-
-
-
-
-
-
-
-    </main>
-    <!-- bootstrap -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

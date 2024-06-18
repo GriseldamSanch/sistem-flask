@@ -1,4 +1,5 @@
 # entrada a la aplicacion
+from datetime import datetime
 from flask import Flask, flash, redirect, render_template, request, session, url_for
 import config
 from flask_mysqldb import MySQL #paquete conexion de  MYSQL
@@ -65,59 +66,45 @@ def getProfesionales():
     return render_template('getProfesionales.html',profesionales=profesionales)
 
 
-#TODO  RUTA MOSTRAR CALENDARIO Y TURNOS DE UN PROFESIONAL
-@app.route('/profesionales/<int:profesional_id>', methods=['GET'])
+#TODO  RUTA MOSTRAR DISPONIBILIDAD Y TURNOS POR PROFESIONAL
+@app.route('/profesionales/<int:profesional_id>', methods=['GET','POST'])
 def calendar_profesional(profesional_id):
-    profesional = Profesional.obtener_por_id(mysql,profesional_id) #obtiene el profesional por id
-    turnos = Profesional.obtener_turnos(mysql,profesional_id) #obtiene los turnos del profesional
-    return render_template('calendarProf.html', profesional=profesional, turnos=turnos)
-# aqui debe ir el calendario reservar turno.
-
-
-#TODO   RUTA AGREGAR TURNO
-@app.route('/profesionales/<int:profesional_id>', methods=['POST'])
-def add_turno(profesional_id):
-    #*datos del formulario
-    fecha = request.form.get('fecha')
-    hora_inicio = request.form.get('horaInicio')
-    hora_fin = request.form.get('horaFin')
-    estado = request.form.get('estado')
-    cliente_id = request.form.get('cliente_id')
-    # Profesional.agregar_turno(mysql,profesional_id,fecha,hora_inicio,hora_fin,estado,cliente_id)
-    # return redirect(url_for('calendar_profesional',profesional_id=profesional_id))
-
-    #* verificar si el turno este disponible
     cur = mysql.connection.cursor()
-    cur.execute("""
-        SELECT id, estado FROM turnos
-        WHERE profesional_id = %s AND fecha = %s AND hora_inicio = %s AND hora_fin = %s
-    """, (profesional_id, fecha, hora_inicio, hora_fin))
-    turno_existente = cur.fetchone()
+        # datos del formulario
+    if request.method == 'POST':
+        turno_id = request.form['turno_id']
+        nuevo_estado = request.form['nuevo_estado']
+        nueva_fecha = request.form['nueva_fecha']
+        #conversion de la fecha ingresada a tipo datetime.date()
+        fecha_ingresada= datetime.strptime(nueva_fecha, '%Y-%m-%d').date()
+        #traer la fecha de la base de datos
+        cur.execute("SELECT fecha FROM horarios_trabajo WHERE id = %s", (turno_id,))
+        result = cur.fetchone() # guardado del resultado de la consulta, en forma de tupla.
+        fecha_actual = result[0] if result else None 
 
-    if turno_existente:
-        if turno_existente[1] == 'reservado':
-            flash("Este turno ya ha sido reservado por otra persona.", "error")
-            cur.close()
+        if fecha_actual == fecha_ingresada:
+            flash('la fecha ya existe')
+            print("la fecha ya existe")
             return redirect(url_for('calendar_profesional', profesional_id=profesional_id))
-        else:
-            # Actualizar el turno a reservado
+        else: 
             cur.execute("""
-                UPDATE turnos
-                SET estado = %s, cliente_id = %s
-                WHERE id = %s
-            """, ('reservado', cliente_id, turno_existente[0]))
-    else:
-        # Insertar un nuevo turno si no existe uno para ese horario
-        cur.execute("""
-            INSERT INTO turnos (profesional_id, fecha, hora_inicio, hora_fin, estado, cliente_id)
-            VALUES (%s, %s, %s, %s, %s, %s)
-        """, (profesional_id, fecha, hora_inicio, hora_fin, 'reservado', cliente_id))
+                    UPDATE horarios_trabajo
+                    SET estado = %s, fecha = %s
+                    WHERE id = %s
+                    """, (nuevo_estado, nueva_fecha, turno_id))
+        mysql.connection.commit()
+        return redirect(url_for('calendar_profesional', profesional_id=profesional_id))
     
-    mysql.connection.commit()
+    
+    # obtener los turnos del profesional
+    cur.execute("""
+                SELECT id, hora_inicio, hora_fin, estado, cliente_id
+                FROM horarios_trabajo
+                WHERE profesional_id = %s
+                """, (profesional_id,))
+    turnos = cur.fetchall()
     cur.close()
-
-    flash("Turno reservado exitosamente.", "success")
-    return redirect(url_for('calendar_profesional', profesional_id=profesional_id))
+    return render_template('calendarProf.html', profesional_id=profesional_id, turnos=turnos)
 
 
 # TODO RUTA LOGOUT

@@ -8,6 +8,17 @@
     <title>Nails Pro 💅🏻</title>
 </head>
 <body>
+    <!-- mensaje flash -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div>
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
     
     <h1>Calendario del Profesional</h1>
     <table>
@@ -64,10 +75,10 @@
         <input type="time" id="hora_fin" name="hora_fin" required> -->
         <br>
         <br>
-        <label for="reservado">Reservado:</label>
-        <input type="checkbox" id="reservado" name="reservado">
+        <!-- <label for="reservado">Reservado:</label>
+        <input type="checkbox" id="reservado" name="reservado"> -->
         <br>
-        <button type="submit">Guardar Turno</button>
+        <button type="submit">Reservar Turno</button>
     </form>
 
 </body>

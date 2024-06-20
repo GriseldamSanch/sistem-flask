@@ -67,6 +67,11 @@ def getProfesionales():
     profesionales = Profesional.get_profesionales(mysql)
     return render_template('getProfesionales.html',profesionales=profesionales)
 
+"""
+TINYINT   ---> se utiliza en Myqsl para almacenar valores binarios y booleanos.
+0: Representa FALSE.
+1: Representa TRUE.
+"""
 
 #TODO  RUTA MOSTRAR DISPONIBILIDAD Y TURNOS POR PROFESIONAL
 @app.route('/profesionales/<int:profesional_id>', methods=['GET','POST'])
@@ -76,8 +81,20 @@ def calendar_profesional(profesional_id):
         fecha = request.form['fecha']
         hora_inicio = request.form['hora']
         # hora_fin = request.form['hora_fin']
-        reservado = 'reservado' in request.form  # True si está marcado, False si no
-        estado = 'reservado' if reservado else 'disponible'
+        # reservado = 'reservado' in request.form  # True si está marcado, False si no
+        # estado = 'reservado' if reservado else 'disponible'
+
+        #*--------validacion fecha------
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT * FROM horarios_trabajo WHERE fecha = %s AND hora_inicio = %s", (fecha, hora_inicio))
+        horario = cur.fetchone()
+        cur.close()
+
+        if horario is not None:
+            flash('Ya existe un turno en esa fecha y hora','warning')
+            return redirect(url_for('calendar_profesional', profesional_id=profesional_id))
+
+        #*--------validacion fecha------
 
         
         # ID del cliente desde la sesión
@@ -89,6 +106,8 @@ def calendar_profesional(profesional_id):
 
     #*-------------------------------------------------
         #!----insercion de datos del formulario a la base de datos
+        reservado = 1
+        estado = 'reservado'
         cur = mysql.connection.cursor()
         cur.execute("INSERT INTO horarios_trabajo (profesional_id,fecha, hora_inicio,  cliente_id, reservado, estado) VALUES (%s, %s, %s, %s, %s, %s)",
                 (profesional_id,fecha, hora_inicio,  cliente_id, reservado, estado))

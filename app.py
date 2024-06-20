@@ -52,6 +52,8 @@ def login():
         session["email"] = email
         session["password"] = password
         session["nombre"] = user[1]
+        #!guardado de id del cliente que inica sesion
+        session["cliente_id"] = user[0]
         
         return redirect(url_for('getProfesionales')) #si coinciden los datos de la consulta, redirige a la ruta turnos
     else: 
@@ -69,41 +71,43 @@ def getProfesionales():
 #TODO  RUTA MOSTRAR DISPONIBILIDAD Y TURNOS POR PROFESIONAL
 @app.route('/profesionales/<int:profesional_id>', methods=['GET','POST'])
 def calendar_profesional(profesional_id):
-    cur = mysql.connection.cursor()
-        # datos del formulario
+    #*-----update de horario_trabajo desde formulario
     if request.method == 'POST':
-        turno_id = request.form['turno_id']
-        nuevo_estado = request.form['nuevo_estado']
-        nueva_fecha = request.form['nueva_fecha']
-        #conversion de la fecha ingresada a tipo datetime.date()
-        fecha_ingresada= datetime.strptime(nueva_fecha, '%Y-%m-%d').date()
-        #traer la fecha de la base de datos
-        cur.execute("SELECT fecha FROM horarios_trabajo WHERE id = %s", (turno_id,))
-        result = cur.fetchone() # guardado del resultado de la consulta, en forma de tupla.
-        fecha_actual = result[0] if result else None 
+        fecha = request.form['fecha']
+        hora_inicio = request.form['hora']
+        # hora_fin = request.form['hora_fin']
+        reservado = 'reservado' in request.form  # True si está marcado, False si no
+        estado = 'reservado' if reservado else 'disponible'
 
-        if fecha_actual == fecha_ingresada:
-            flash('la fecha ya existe')
-            print("la fecha ya existe")
-            return redirect(url_for('calendar_profesional', profesional_id=profesional_id))
-        else: 
-            cur.execute("""
-                    UPDATE horarios_trabajo
-                    SET estado = %s, fecha = %s
-                    WHERE id = %s
-                    """, (nuevo_estado, nueva_fecha, turno_id))
+        
+        # ID del cliente desde la sesión
+        cliente_id = session.get('cliente_id')
+
+        if cliente_id is None:
+            # Manejar caso donde no hay ID de cliente en la sesión (por seguridad)
+            return "Error: ID de cliente no encontrado en la sesión."
+
+    #*-------------------------------------------------
+        #!----insercion de datos del formulario a la base de datos
+        cur = mysql.connection.cursor()
+        cur.execute("INSERT INTO horarios_trabajo (profesional_id,fecha, hora_inicio,  cliente_id, reservado, estado) VALUES (%s, %s, %s, %s, %s, %s)",
+                (profesional_id,fecha, hora_inicio,  cliente_id, reservado, estado))
+        # Confirma la transacción
         mysql.connection.commit()
+        # Cierra el cursor
+        cur.close()
+        # Redirigir después de insertar datos para evitar el reenvío del formulario
         return redirect(url_for('calendar_profesional', profesional_id=profesional_id))
+        #!--------------------------------------------------
     
-    
-    # obtener los turnos del profesional
-    cur.execute("""
-                SELECT id, hora_inicio, hora_fin, estado, cliente_id
-                FROM horarios_trabajo
-                WHERE profesional_id = %s
-                """, (profesional_id,))
+    #*---- Obtén los turnos del profesional
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * FROM horarios_trabajo WHERE profesional_id = %s", (profesional_id,))
     turnos = cur.fetchall()
     cur.close()
+    #*----------------------------------------
+     
+    #*-----renderiza la plantilla calendarProf.html
     return render_template('calendarProf.html', profesional_id=profesional_id, turnos=turnos)
 
 
@@ -142,4 +146,5 @@ def new_cliente():
 
 if __name__ == '__main__':
     app.run(debug=True)  # debug= true para que el servidor se reinicie cada vez que cambia el código.
+
 

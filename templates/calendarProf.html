@@ -9,30 +9,19 @@
 </head>
 <body>
     
-     <!-- Mensajes flash -->
-     {% with messages = get_flashed_messages(with_categories=true) %}
-     {% if messages %}
-         <div class="alerts">
-             {% for category, message in messages %}
-                 <div class="alert alert-{{ category }}">
-                     {{ message }}
-                 </div>
-             {% endfor %}
-         </div>
-     {% endif %}
- {% endwith %}
-
     <h1>Calendario del Profesional</h1>
     <table>
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Hora Inicio</th>
-                <th>Hora Fin</th>
-                <th>Estado</th>
-                <th>ID Cliente</th>
+                <th>Profesional_id</th>
                 <th>Fecha</th>
-                <th>Acciones</th>
+                <th>Hora_inicio</th>
+                <th>Hora_fin</th>
+                <th>Cliente_id</th>
+                <th>Reservado</th>
+                <th>Estado</th>
+                
             </tr>
         </thead>
         <tbody>
@@ -44,22 +33,42 @@
                 <td>{{ turno[3] }}</td>
                 <td>{{ turno[4] }}</td>
                 <td>{{ turno[5] }}</td>
+                <td>{{ turno[6] }}</td>
+                <td>{{ turno[7] }}</td>
+                <td>{{ turno[8] }}</td>
                 <td>
-                    <form method="post" action="{{ url_for('calendar_profesional', profesional_id=profesional_id) }}">
-                        <input type="hidden" name="turno_id" value="{{ turno[0] }}">
-                        <label for="nuevo_estado_{{ turno[0] }}">Estado:</label>
-                        <select id="nuevo_estado_{{ turno[0] }}" name="nuevo_estado" required>
-                            <option value="disponible" {% if turno[3] == 'disponible' %}selected{% endif %}>Disponible</option>
-                            <option value="reservado" {% if turno[3] == 'reservado' %}selected{% endif %}>Reservado</option>
-                        </select>
-                        <label for="nueva_fecha_{{ turno[0] }}">Fecha:</label>
-                        <input type="date" id="nueva_fecha_{{ turno[0] }}" name="nueva_fecha" value="{{ turno[5] }}" required>
-                        <button type="submit">Actualizar</button>
-                    </form>
-                </td>
-            </tr>
             {% endfor %}
         </tbody>
     </table>
+    <br>
+    <br>
+    <form method="POST" action="{{ url_for('calendar_profesional', profesional_id=profesional_id,turnos=turnos) }}">
+
+        <label for="fecha">Fecha:</label>
+        <input type="date" id="fecha" name="fecha" required>
+        <br>
+        <!-- <label for="hora_inicio">Hora de Inicio:</label>
+        <input type="time" id="hora_inicio" name="hora_inicio" value="" required> -->
+
+        <!-- test validacion de horarios laboral -->
+        <label for="">HORARIOS DISPONIBLES</label>
+        <select name="hora" id="hora">
+            <option value="08:00">08:00</option>
+            <option value="10:00">10:00</option>
+            <option value="12:00">12:00</option>
+            <option value="14:00">14:00</option>
+        </select>
+
+        <br>
+        <!-- <label for="hora_fin">Hora de Fin:</label>
+        <input type="time" id="hora_fin" name="hora_fin" required> -->
+        <br>
+        <br>
+        <label for="reservado">Reservado:</label>
+        <input type="checkbox" id="reservado" name="reservado">
+        <br>
+        <button type="submit">Guardar Turno</button>
+    </form>
+
 </body>
 </html>

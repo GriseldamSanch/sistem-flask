@@ -75,14 +75,16 @@ TINYINT   ---> se utiliza en Myqsl para almacenar valores binarios y booleanos.
 #TODO  RUTA MOSTRAR DISPONIBILIDAD Y TURNOS POR PROFESIONAL
 @app.route('/profesionales/<int:profesional_id>', methods=['GET','POST'])
 def calendar_profesional(profesional_id):
-    #*-----update de horario_trabajo desde formulario
+    #*--update de horario_trabajo desde formulario------
     if request.method == 'POST':
         fecha = request.form['fecha']
         hora_inicio = request.form['hora']
+    #*--------------------------------------------------
 
-        print(f"---------{type(profesional_id)}---------{profesional_id}------------")
+        #*--------validacion fecha----------------------
 
-        #*--------validacion fecha------
+        
+
         cur = mysql.connection.cursor()
         cur.execute("SELECT * FROM horarios_trabajo WHERE fecha = %s AND hora_inicio = %s", (fecha, hora_inicio))
         horario = cur.fetchone()
@@ -92,14 +94,11 @@ def calendar_profesional(profesional_id):
             flash('Ya existe un turno en esa fecha y hora','warning')
             return redirect(url_for('calendar_profesional', profesional_id=profesional_id))
 
-        #*--------validacion fecha------
+        #*---------------------------------------------
 
-        
         # ID del cliente desde la sesión
         cliente_id = session.get('cliente_id')
 
-
-    #*-------------------------------------------------
         #!----insercion de datos del formulario a la base de datos
         reservado = 1
         estado = 'reservado'
@@ -118,9 +117,9 @@ def calendar_profesional(profesional_id):
     cur = mysql.connection.cursor()
     cur.execute("SELECT * FROM horarios_trabajo WHERE profesional_id = %s", (profesional_id,))
     turnos = cur.fetchall()
+   
     cur.close()
     #*----------------------------------------
-     
     #*-----renderiza la plantilla calendarProf.html
     return render_template('calendarProf.html', profesional_id=profesional_id, turnos=turnos)
 

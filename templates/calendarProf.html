@@ -8,7 +8,16 @@
     <title>Nails Pro 💅🏻</title>
 </head>
 <body>
-    <!-- mensaje flash -->
+    <!--  limitar a partir de fecha actual     -->
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            // Obtener la fecha actual
+            let today = new Date().toISOString().split('T')[0]
+            document.getElementById('fecha').setAttribute('min', today)
+        })
+    </script>
+
+    <!-- mensaje flash  -->
     {% with messages = get_flashed_messages(with_categories=true) %}
   {% if messages %}
     <div>
@@ -19,7 +28,6 @@
   {% endif %}
 {% endwith %}
 
-    
     <h1>Calendario del Profesional</h1>
     <table>
         <thead>
@@ -75,7 +83,6 @@
         <br>
         <button type="submit">Reservar Turno</button>
     </form>
-
 
 </body>
 </html>

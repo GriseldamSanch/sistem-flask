@@ -72,7 +72,6 @@ TINYINT   ---> se utiliza en Myqsl para almacenar valores binarios y booleanos.
 0: Representa FALSE.
 1: Representa TRUE.
 """
-
 #TODO  RUTA MOSTRAR DISPONIBILIDAD Y TURNOS POR PROFESIONAL
 @app.route('/profesionales/<int:profesional_id>', methods=['GET','POST'])
 def calendar_profesional(profesional_id):
@@ -80,9 +79,8 @@ def calendar_profesional(profesional_id):
     if request.method == 'POST':
         fecha = request.form['fecha']
         hora_inicio = request.form['hora']
-        # hora_fin = request.form['hora_fin']
-        # reservado = 'reservado' in request.form  # True si está marcado, False si no
-        # estado = 'reservado' if reservado else 'disponible'
+
+        print(f"---------{type(profesional_id)}---------{profesional_id}------------")
 
         #*--------validacion fecha------
         cur = mysql.connection.cursor()
@@ -100,9 +98,6 @@ def calendar_profesional(profesional_id):
         # ID del cliente desde la sesión
         cliente_id = session.get('cliente_id')
 
-        if cliente_id is None:
-            # Manejar caso donde no hay ID de cliente en la sesión (por seguridad)
-            return "Error: ID de cliente no encontrado en la sesión."
 
     #*-------------------------------------------------
         #!----insercion de datos del formulario a la base de datos
@@ -119,7 +114,7 @@ def calendar_profesional(profesional_id):
         return redirect(url_for('calendar_profesional', profesional_id=profesional_id))
         #!--------------------------------------------------
     
-    #*---- Obtén los turnos del profesional
+    #*---- Obtén los turnos del profesionals
     cur = mysql.connection.cursor()
     cur.execute("SELECT * FROM horarios_trabajo WHERE profesional_id = %s", (profesional_id,))
     turnos = cur.fetchall()

@@ -4,8 +4,7 @@ from flask import Flask, flash, redirect, render_template, request, session, url
 import config
 from flask_mysqldb import MySQL #paquete conexion de  MYSQL
 
-# from models.clientes import Cliente
-
+from models.clientes import Cliente
 from models.profesionales import Profesional
 
 #--------------------------------------------------------------------------------------------------------------------------
@@ -45,14 +44,13 @@ def login():
     cur = mysql.connection.cursor() # conexion a la base de datos
     cur.execute("SELECT * FROM clientes WHERE email = %s AND password = %s", (email, password))
     user = cur.fetchone() # aqui se guarda la consulta
-    print(user)
     cur.close() # cerrar la base de datos
     
     if user is not None: # si el usuario existe
         session["email"] = email
         session["password"] = password
         session["nombre"] = user[1]
-        #!guardado de id del cliente que inica sesion
+        #!guardado de id del cliente que inicia sesion
         session["cliente_id"] = user[0]
         
         return redirect(url_for('getProfesionales')) #si coinciden los datos de la consulta, redirige a la ruta turnos
@@ -60,11 +58,12 @@ def login():
         return render_template('index.html',message="Usuario o contraseña incorrectos")
     
 
+
 # TODO RUTA VER PROFESIONALES 
 @app.route('/profesionales', methods=['GET'])
 def getProfesionales():
     #instancia de la clase profesionales
-    profesionales = Profesional.get_profesionales(mysql)
+    profesionales = Profesional.get_profesionales(mysql) #! de clase profesional
     return render_template('getProfesionales.html',profesionales=profesionales)
 
 """
@@ -80,45 +79,25 @@ def calendar_profesional(profesional_id):
         fecha = request.form['fecha']
         hora_inicio = request.form['hora']
     #*--------------------------------------------------
-
         #*--------validacion fecha----------------------
-
-        
-
         cur = mysql.connection.cursor()
         cur.execute("SELECT * FROM horarios_trabajo WHERE fecha = %s AND hora_inicio = %s", (fecha, hora_inicio))
         horario = cur.fetchone()
         cur.close()
-
         if horario is not None:
             flash('Ya existe un turno en esa fecha y hora','warning')
             return redirect(url_for('calendar_profesional', profesional_id=profesional_id))
-
         #*---------------------------------------------
-
         # ID del cliente desde la sesión
         cliente_id = session.get('cliente_id')
 
-        #!----insercion de datos del formulario a la base de datos
-        reservado = 1
-        estado = 'reservado'
-        cur = mysql.connection.cursor()
-        cur.execute("INSERT INTO horarios_trabajo (profesional_id,fecha, hora_inicio,  cliente_id, reservado, estado) VALUES (%s, %s, %s, %s, %s, %s)",
-                (profesional_id,fecha, hora_inicio,  cliente_id, reservado, estado))
-        # Confirma la transacción
-        mysql.connection.commit()
-        # Cierra el cursor
-        cur.close()
-        # Redirigir después de insertar datos para evitar el reenvío del formulario
+        #*----insercion de datos del formulario a la base de datos
+        Profesional.agregar_turno(mysql,profesional_id,fecha, hora_inicio,  cliente_id, 1, 'reservado') #!de clase Profesional
         return redirect(url_for('calendar_profesional', profesional_id=profesional_id))
-        #!--------------------------------------------------
-    
-    #*---- Obtén los turnos del profesionals
-    cur = mysql.connection.cursor()
-    cur.execute("SELECT * FROM horarios_trabajo WHERE profesional_id = %s", (profesional_id,))
-    turnos = cur.fetchall()
-   
-    cur.close()
+        #*--------------------------------------------------
+
+    #*---- Obtén los turnos del profesional
+    turnos = Profesional.obtener_turnos(mysql,profesional_id) #!de clase Profesional
     #*----------------------------------------
     #*-----renderiza la plantilla calendarProf.html
     return render_template('calendarProf.html', profesional_id=profesional_id, turnos=turnos)
@@ -134,18 +113,27 @@ def logout():
 # TODO RUTA NEW CLIENTE
 @app.route('/new-cliente', methods=['GET', 'POST'])
 def new_cliente():
+    #* ------datos del formulario---------------------------------------
     if request.method == 'POST': # si se envia el formulario
-        nombre = request.form.get('nombre') # obtiene nombre del formulario
-        email = request.form.get('email') # obtiene email del formulario
-        telefono = request.form.get('telefono') # obtiene telefono del formulario
-        password = request.form.get('password')# obtiene password del formulario
+        nombre = request.form.get('nombre')
+        email = request.form.get('email')
+        telefono = request.form.get('telefono')
+        password = request.form.get('password')
+    #* -----------------------------------------------------------------
         if nombre and email and telefono and password: # si todos los campos estan completos
-            cur = mysql.connection.cursor() #llamado la la base de datos
+            #* Creacion de nuevo cliente
+            nuevo_cliente = Cliente(nombre, email, telefono, password) #!de la clase Cliente
+            #*------ insercion del nuevo cliente a la bd-----------
+            cur = mysql.connection.cursor() #llamado a la base de datos
             cur.execute("INSERT INTO clientes (nombre, email, telefono, password) VALUES (%s, %s, %s, %s)", (nombre, email, telefono, password))#consulta sql
             mysql.connection.commit()# confirmacion del sql
+            # Obtener el ID del cliente recién insertado
+            nuevo_cliente_id = cur.lastrowid
             cur.close() #cierre 
             flash('Usuario registrado correctamente', 'success')  # Añade el mensaje flash
             return redirect(url_for('new_cliente'))  # Redirige a la misma página para mostrar el mensaje
+            #*-----------------------------------------------------
+        
     return render_template('new-cliente.html')
     
    

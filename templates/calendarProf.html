@@ -17,6 +17,13 @@
         })
     </script>
 
+<nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand fw-bolder" href="#">💅🏻 Nails Pro 💅🏻</a>
+        <span>Bienvenido/a {{session['nombre']}}<a href="{{url_for('logout')}}" class="mx-3">Logout</a></span>
+    </div>
+</nav>
+
     <!-- mensaje flash  -->
     {% with messages = get_flashed_messages(with_categories=true) %}
   {% if messages %}

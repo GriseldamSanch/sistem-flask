@@ -6,7 +6,3 @@ class Cliente:
         self.telefono = telefono
         self.password = password
         self.historial_turnos = []
-
-    def cancelar_turno(self, turno):
-        # Lógica para cancelar turno
-        pass

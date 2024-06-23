@@ -18,6 +18,9 @@ se modifica la ruta calendar_profesional(profesional_id):
 - se debe realizar la modularizacion del codigo utilizando las clases Profesional,Cliente y Administrador.
 
 
+##### 23/06
+se crea estilo para index.html 
+
 
 
 

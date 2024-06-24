@@ -3,208 +3,314 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <title>Nails Pro 💅🏻</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <title>NailsPro💅🏻</title>
 </head>
 <style>
+/* fuentes */
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+AU+TAS:wght@100..400&family=Quicksand:wght@300..700&display=swap');
 
-    @import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300..700&display=swap');
-     /* font de logo */
-     @import url('https://fonts.googleapis.com/css2?family=Playwrite+AU+TAS:wght@100..400&display=swap');
+body, html {
+height: 100%;
+margin: 0;
+font-family: "Quicksand", sans-serif;
+font-optical-sizing: auto;
+font-weight: weight;
+font-style: normal;
+}
 
-                body {
-                /* Gradient background */
-                margin: 0; /* Remove default margin */
-                padding-top: 80px; /* Adjust padding top to accommodate fixed header */
-                font-family: "Quicksand", sans-serif;
-                font-optical-sizing: auto;
-                font-weight: weight;
-                font-style: normal;
-                background-color: #fbe4f6;
-            }
-    
-            /* Custom styles for the fixed header */
-            .fixed-top {
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                z-index: 1030; /* Ensure header stays above content */
-                background-color: #fbe4f6; /* Transparent background */
-                font-size: x-small;
-                /* background-image: url('https://images.unsplash.com/photo-1598104358204-87cefc7c5986?q=80&w=1509&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); 
-            background-size: cover;
-            background-position: center; */
-            }
-    
-            .navbar-brand,
-            .nav-link {
-            color: rgb(0, 0, 0) !important; 
-            font: menu;
-           }
+ul{
+    list-style-type: none
+}
 
-          
-           .nombre-perfil{
-            padding: 5px;
-            margin-left: 5px;
-           }
-    
-           .logo-container {
+body{
+    background-image: url(https://images.unsplash.com/photo-1632345031435-8727f6897d53?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+}
+
+.navbar-custom {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e7e7e7;
+}
+.navbar-custom .navbar-brand img {
+    width: 40px;
+    height: 40px;
+}
+.navbar-custom .nav-link {
+    color: #333;
+    margin-right: 10px;
+}
+
+.navbar-custom .nav-link:hover {
+    color: #f48fb1;
+}
+/* footer */
+.footer {
+background-color: #f8f9fa;
+border-top: 1px solid #e7e7e7;
+padding: 20px 0;
+}
+.footer .social-icons a {
+color: #333;
+margin: 0 10px;
+font-size: 24px;
+}
+.footer .social-icons a:hover {
+color: #f48fb1;
+}
+.footer .footer-logo img {
+width: 40px;
+height: 40px;
+}
+.footer .footer-logo {
+display: flex;
+align-items: center;
+justify-content: center;
+}
+.footer .footer-logo span {
+margin-left: 10px;
+font-size: 18px;
+font-weight: bold;
+}
+.footer .copyright,
+.footer .credits {
+text-align: center;
+font-size: 14px;
+margin-top: 10px;
+color: #666;
+}
+.footer .credits {
+font-size: 12px;
+color: #777;
+}
+/* reserva turnos */
+.container-turnos {
+            text-align: center;
+            padding: 20px;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .profesionales-carousel {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-left: 10px;
-           }
+            overflow-x: auto;
+            gap: 10px;
+            padding: 20px 0;
+            scroll-snap-type: x mandatory;
+        }
 
-           .fixed-top{
-            font-size: 13px;
-           }
+        .profesional-card {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            flex: 0 0 200px; /* Ancho de cada tarjeta */
+            text-align: left;
+            scroll-snap-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
 
-           .logo-container a {
-            font-size: 13px;
-            position: relative;
-            margin-top: 2px;
-            font-family: "Playwrite AU TAS", cursive;
-            
-           }
+        .profesional-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
 
-           .ms-auto{
+        .profesional-card img.avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+
+        .profesional-card img.nails {
+            width: 100%;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .card-title {
+            font-size: 1rem;
+            font-weight: bold;
+            margin: 10px 0 5px;
+        }
+
+        .card-text {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 8px 12px;
+            background: #007bff;
+            color: #fff;
+            text-align: center;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background: #0056b3;
+        }
+
+        .card-body {
             display: flex;
+            flex-direction: column;
             align-items: center;
-           }
+        }
+        /* Estilos personalizados de la barra de desplazamiento */
+        .profesionales-carousel::-webkit-scrollbar {
+            height: 12px; /* Altura del scrollbar horizontal */
+        }
 
-           .footer{
-            color: black;
-            font-size: xx-small;
-            display: flex;
-            flex-wrap: nowrap;
-            align-items: center;
-            justify-content: center;
-            padding-top: 33px;
-            height: 70px;
-           }
+        .profesionales-carousel::-webkit-scrollbar-track {
+            background: transparent; /* Color del fondo del track */
+        }
 
-           .icons-redes{
-            order: 2;
-            margin-bottom: 0;
-            max-width: 436px;
-           }
+        .profesionales-carousel::-webkit-scrollbar-thumb {
+            background:#f48fb1; /* Color de la thumb (barra de desplazamiento) */
+            border-radius: 10px; /* Bordes redondeados para la thumb */
+        }
 
-           .footer-logo{
-            position: absolute;
-            left: 0;
-           }
+        .profesionales-carousel::-webkit-scrollbar-thumb:hover {
+            background: black; /* Color de la thumb al pasar el cursor */
+        }
 
-           .copyright{
-            order: 3;
-            position: absolute;
-            right: 0;
-           }
+    /* Responsive adjustments */
+    @media (max-width: 1024px) {
+        .profesional-card {
+            flex: 0 0 45%;
+            max-width: 45%;
+        }
+    }
 
-           .block{
-            display: block;
-           }
+    @media (max-width: 768px) {
+        .profesional-card {
+            flex: 0 0 80%;
+            max-width: 80%;
+        }
+    }
 
-           .align-right{
-            text-align: right;
-           }
-
-
-    </style>
+    @media (max-width: 480px) {
+        .profesional-card {
+            flex: 0 0 90%;
+            max-width: 90%;
+        }
+    }
+</style>
 <body>
+    <!-- header -->
     <header class="fixed-top">
-        <nav class="navbar navbar-expand-lg">
+        <nav class="navbar navbar-expand-lg navbar-custom">
             <div class="container-fluid">
-                <div class="logo-container">
-                    <img width="16" height="16" src="https://img.icons8.com/pulsar-color/96/nails.png" alt="nails"/>
-                    <a class="navbar-brand fw-bolder" href="#">NailsPro</a>
-                </div>
-                <!-- Navbar Brand -->
+                <!-- Logo and Brand -->
+                <a class="navbar-brand d-flex align-items-center" href="#">
+                    <img src="https://img.icons8.com/pulsar-color/96/nails.png" alt="Logo"/>
+                    <span class="ms-2 fw-bold">NailsPro</span>
+                </a>
                 <!-- Toggler/collapsible Button -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <!-- Navbar content that will collapse -->
+                <!-- Navbar links -->
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <span class="nav-link"> Bienvenido/a {{ session['nombre'] }}</span>
+                            <a class="nav-link" href="{{ url_for('login') }}">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ url_for('logout') }}" class="nav-link"><img width="24" height="24" src="https://img.icons8.com/material-outlined/24/exit.png" alt="exit"/></a>
+                            <a class="nav-link register-btn" href="{{ url_for('new_cliente') }}" >Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('logout') }}"><img width="24" height="24" src="https://img.icons8.com/material-sharp/48/exit.png" alt="exit"/>Logout</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-
+<!-- main -->
     <main>
-        <h1>Pedi tu turno</h1>
-
-  <!-- <h2>Profesionales Disponibles</h2> -->
-
-  <!-- <div class="container">
-    <h1>Profesionales</h1>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Especialidad</th>
-                <th>Disponibilidad</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for profesional in profesionales %}
-            <tr>
-                <td>{{ profesional.nombre }}</td>
-                <td>{{ profesional.especialidad }}</td>
-                <td>{{ profesional.disponibilidad }}</td>
-                <td>
-                    <a href="{{ url_for('calendar_profesional', profesional_id=profesional.id) }}" class="btn btn-primary">Ver Calendario</a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div> -->
-<div class="container">
-    <h1>Profesionales</h1>
-
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-        {% for profesional in profesionales %}
-        <div class="col">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">{{ profesional.nombre }}</h5>
-                    <p class="card-text">Especialidad: {{ profesional.especialidad }}</p>
-                    <p class="card-text">Disponibilidad: {{ profesional.disponibilidad }}</p>
-                    <a href="{{ url_for('calendar_profesional', profesional_id=profesional.id) }}" class="btn btn-primary">Ver Calendario</a>
+        <div class="container-turnos">
+            <h2>Reserva de Turnos</h2>
+            <div class="profesionales-carousel">
+                {% for profesional in profesionales %}
+                <div class="profesional-card">
+                    <div class="card-body">
+                        <!-- Avatar del profesional -->
+                        <img class="avatar" src="https://img.icons8.com/color/48/user.png" alt="avatar"/>
+                        <!-- Título del nombre -->
+                        <h5 class="card-title">{{ profesional.nombre }}</h5>
+                        <!-- Imagen de uñas -->
+                        <img class="nails" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQB1-Q-Wkf4TEifKY5unqtfaeCp35_CZvcifw&s" alt="uñas"/>
+                        <!-- Información del profesional -->
+                        <p class="card-text">{{ profesional.especialidad }}</p>
+                        <p class="card-text">{{ profesional.disponibilidad }}</p>
+                        <!-- Botón de reserva -->
+                        <a href="{{ url_for('calendar_profesional', profesional_id=profesional.id) }}" class="btn">Reservar</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <!-- <div class="container-turnos">
+            <h2>Reserva de Turnos</h2>
+            <div class="profesionales-carousel">
+                {% for profesional in profesionales %}
+                <div class="profesional-card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ profesional.nombre }}</h5>
+                        <div>
+                            <img width="48" height="48" src="https://img.icons8.com/color/48/styled-components.png" alt="styled-components"/>
+                            <p class="card-text">{{ profesional.especialidad }}</p>
+                        </div>
+                        <p class="card-text">{{ profesional.disponibilidad }}</p>
+                        <a href="{{ url_for('calendar_profesional', profesional_id=profesional.id) }}" class="btn">Reservar</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div> -->
+</main>
+<!-- Footer -->
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <!-- Logo -->
+                <div class="col-md-4 d-flex justify-content-center mb-3 mb-md-0 footer-logo">
+                    <img src="https://img.icons8.com/pulsar-color/96/nails.png" alt="Logo"/>
+                    <span>NailsPro</span>
+                </div>
+                <!-- Social Icons -->
+                <div class="col-md-4 d-flex justify-content-center mb-3 mb-md-0 social-icons">
+                    <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                        <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/github.png" alt="github"/>
+                    </a>
+                    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+                        <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/linkedin.png" alt="linkedin"/>
+                    </a>
+                </div>
+                <!-- Copyright and Credits -->
+                <div class="col-md-4 d-flex flex-column justify-content-center align-items-center">
+                    <p class="copyright mb-0">&copy; 2024 NailsPro. Todos los derechos reservados.</p>
+                    <p class="block text-sm credits">Made with ❤️ by Griselda Sanchez</p>
                 </div>
             </div>
         </div>
-        {% endfor %}
-    </div>
-</div>
-</main>
+    </footer>
 
-<footer class="footer">
-
-    <ul class="icons-redes">
-        <li>github</li>
-        <li>linkedin</li>
-    </ul>
-    <span class="footer-logo">NailsPro</span>
-    <p class="copyright">
-        <span class="block text-sm align-right">@ 2024 GriseldaS</span>
-        <span class="block text-sm align-right">Made with ❤️ by Griselda Sanchez</span>
-    </p>
-
-</footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"></script>
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

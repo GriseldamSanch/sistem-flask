@@ -13,13 +13,22 @@ se modifica la ruta calendar_profesional(profesional_id):
 2. fix el envio del formulario al recargar la pagina. linea 85
 3. se utiliza session para guardar el id del cliente y utilizarlo en calendar_profesional.
 
-- se debe validar las fechas de los turnos de los profesionales.
+
 - el cliente debe poder cancelar el turno.
 - se debe realizar la modularizacion del codigo utilizando las clases Profesional,Cliente y Administrador.
 
 
 ##### 23/06
-se crea estilo para index.html 
+se crea estilo para index.html
+se crea estilo para getPorfesionales.
+
+
+####
+
+crear nueva columna en tabla profesionales llamada imagen y colocar una imagen asociada a su especalidad.
+
+falta estilo formulario de registro.
+falta agregar clase administrador.
 
 
 

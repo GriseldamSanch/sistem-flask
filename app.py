@@ -35,30 +35,32 @@ def home():
 
 
 #TODO RUTA LOGIN
-@app.route('/login', methods=['POST']) 
+@app.route('/login', methods=['GET','POST']) 
 def login():
-    # datos del formulario
-    email = request.form['email']
-    password = request.form['password']
-    
-    cur = mysql.connection.cursor() # conexion a la base de datos
-    cur.execute("SELECT * FROM clientes WHERE email = %s AND password = %s", (email, password))
-    user = cur.fetchone() # aqui se guarda la consulta
-    cur.close() # cerrar la base de datos
-    
-    if user is not None: # si el usuario existe
-        session["email"] = email
-        session["password"] = password
-        session["nombre"] = user[1]
-        #!guardado de id del cliente que inicia sesion
-        session["cliente_id"] = user[0]
+    if request.method == 'POST':
+        # Procesar datos de login
+        email = request.form['email']
+        password = request.form['password']
         
-        return redirect(url_for('getProfesionales')) #si coinciden los datos de la consulta, redirige a la ruta turnos
-    else: 
-        return render_template('index.html',message="Usuario o contraseña incorrectos")
+        cur = mysql.connection.cursor() # Conexion a la base de datos
+        cur.execute("SELECT * FROM clientes WHERE email = %s AND password = %s", (email, password))
+        user = cur.fetchone() # Aqui se guarda la consulta
+        cur.close() # Cerrar la base de datos
+        
+        if user is not None: # Si el usuario existe
+            session["email"] = email
+            session["password"] = password
+            session["nombre"] = user[1]
+            # Guardado de id del cliente que inicia sesion
+            session["cliente_id"] = user[0]
+            
+            return redirect(url_for('getProfesionales')) # Redirige a la ruta turnos si coinciden los datos de la consulta
+        else: 
+            flash("Usuario o contraseña incorrectos", 'danger')
+            return redirect(url_for('login')) # Redirige a la misma página para mostrar el mensaje de error
+    return render_template('index.html') # Muestra el formulario de login para solicitudes GET
+   
     
-
-
 # TODO RUTA VER PROFESIONALES 
 @app.route('/profesionales', methods=['GET'])
 def getProfesionales():
@@ -78,6 +80,7 @@ def calendar_profesional(profesional_id):
     if request.method == 'POST':
         fecha = request.form['fecha']
         hora_inicio = request.form['hora']
+        servicio = request.form['servicio']
     #*--------------------------------------------------
         #*--------validacion fecha----------------------
         cur = mysql.connection.cursor()
@@ -92,15 +95,17 @@ def calendar_profesional(profesional_id):
         cliente_id = session.get('cliente_id')
 
         #*----insercion de datos del formulario a la base de datos
-        Profesional.agregar_turno(mysql,profesional_id,fecha, hora_inicio,  cliente_id, 1, 'reservado') #!de clase Profesional
+        Profesional.agregar_turno(mysql,profesional_id,fecha, hora_inicio,  cliente_id, 1, 'reservado',servicio) #!de clase Profesional
         return redirect(url_for('calendar_profesional', profesional_id=profesional_id))
         #*--------------------------------------------------
 
     #*---- Obtén los turnos del profesional
     turnos = Profesional.obtener_turnos(mysql,profesional_id) #!de clase Profesional
+    profName = Profesional.obtener_por_id(mysql,profesional_id).nombre #!de clase Profesional
     #*----------------------------------------
     #*-----renderiza la plantilla calendarProf.html
-    return render_template('calendarProf.html', profesional_id=profesional_id, turnos=turnos)
+    return render_template('calendarProf.html', profesional_id=profesional_id, turnos=turnos,profName=profName)
+
 
 
 # TODO RUTA LOGOUT
@@ -130,7 +135,7 @@ def new_cliente():
             # Obtener el ID del cliente recién insertado
             nuevo_cliente_id = cur.lastrowid
             cur.close() #cierre 
-            flash('Usuario registrado correctamente', 'success')  # Añade el mensaje flash
+            flash('Registro exitoso, inicia sesion', 'success')  # Añade el mensaje flash
             return redirect(url_for('new_cliente'))  # Redirige a la misma página para mostrar el mensaje
             #*-----------------------------------------------------
         

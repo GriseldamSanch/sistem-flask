@@ -20,15 +20,23 @@ se modifica la ruta calendar_profesional(profesional_id):
 
 ##### 23/06
 se crea estilo para index.html
-se crea estilo para getPorfesionales.
+se crea estilo para getPorfesionales.html
+
 
 
 ####
 
-crear nueva columna en tabla profesionales llamada imagen y colocar una imagen asociada a su especalidad.
+crear nueva columna en tabla profesionales llamada imagen y colocar una imagen asociada a su especialidad.
 
 falta estilo formulario de registro.
 falta agregar clase administrador.
+crear columna en horarios_trabajo con servicio a realizar
+- error en la validacion de usuario ya registrado. template 
+- no deslogearse al hacer click en login del header
+- msj de ya existe turno existente agregar cierre darle estilo y que se muestre solo unos segundos
+
+
+
 
 
 

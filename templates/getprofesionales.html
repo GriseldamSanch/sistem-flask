@@ -9,8 +9,8 @@
     <title>NailsPro💅🏻</title>
 </head>
 <style>
-/* fuentes */
-@import url('https://fonts.googleapis.com/css2?family=Playwrite+AU+TAS:wght@100..400&family=Quicksand:wght@300..700&display=swap');
+   /* fuentes */
+   @import url('https://fonts.googleapis.com/css2?family=Playwrite+AU+TAS:wght@100..400&family=Quicksand:wght@300..700&display=swap');
 
 body, html {
 height: 100%;
@@ -21,14 +21,40 @@ font-weight: weight;
 font-style: normal;
 }
 
-ul{
-    list-style-type: none
+.bg-container {
+/* Background image */
+background-image: url('https://images.unsplash.com/photo-1664794497169-5192dd09d5b6?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+/* Full height */
+height: 70vh;
+/* Center and scale the image nicely */
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+/* Add the blur effect */
+filter: blur(2px);
 }
-
-body{
-    background-image: url(https://images.unsplash.com/photo-1632345031435-8727f6897d53?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+.content {
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+color: rgb(0, 0, 0);
+text-align: center;
 }
-
+.overlay {
+/* Full height */
+height: 70vh;
+/* Black background with opacity */
+background-color: rgb(157 157 157 / 50%); /* Black see-through */
+/* Centered */
+display: flex;
+justify-content: center;
+align-items: center;
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+}
 .navbar-custom {
     background-color: #f8f9fa;
     border-bottom: 1px solid #e7e7e7;
@@ -207,8 +233,8 @@ color: #777;
         }
     }
 </style>
+<!-- header -->
 <body>
-    <!-- header -->
     <header class="fixed-top">
         <nav class="navbar navbar-expand-lg navbar-custom">
             <div class="container-fluid">
@@ -233,28 +259,41 @@ color: #777;
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('logout') }}"><img width="24" height="24" src="https://img.icons8.com/material-sharp/48/exit.png" alt="exit"/>Logout</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link">hola, {{ session['nombre'] }}</a>
+                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
+<!-- Background Container -->
+<div class="bg-container"></div>
+<!-- Overlay Container -->
+<div class="overlay">
+<div class="content">
+    <h1>Welcome to NailsPro</h1>
+    <p>the art of manicure</p>
+</div>
+</div>
+  
 <!-- main -->
     <main>
         <div class="container-turnos">
-            <h2>Reserva de Turnos</h2>
+            <p>❤️ Nuestros profesionales</p>
             <div class="profesionales-carousel">
                 {% for profesional in profesionales %}
                 <div class="profesional-card">
                     <div class="card-body">
                         <!-- Avatar del profesional -->
-                        <img class="avatar" src="https://img.icons8.com/color/48/user.png" alt="avatar"/>
+                        <!-- <img class="avatar" src="https://img.icons8.com/color/48/user.png" alt="avatar"/> -->
                         <!-- Título del nombre -->
                         <h5 class="card-title">{{ profesional.nombre }}</h5>
                         <!-- Imagen de uñas -->
-                        <img class="nails" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQB1-Q-Wkf4TEifKY5unqtfaeCp35_CZvcifw&s" alt="uñas"/>
+                        <img class="nails" src="{{ profesional.especialidad_img }}"  alt="uñas"/>
                         <!-- Información del profesional -->
                         <p class="card-text">{{ profesional.especialidad }}</p>
-                        <p class="card-text">{{ profesional.disponibilidad }}</p>
+                        <li class="card-text">{{ profesional.servicio_especial }}</li>
                         <!-- Botón de reserva -->
                         <a href="{{ url_for('calendar_profesional', profesional_id=profesional.id) }}" class="btn">Reservar</a>
                     </div>
@@ -262,24 +301,7 @@ color: #777;
                 {% endfor %}
             </div>
         </div>
-        <!-- <div class="container-turnos">
-            <h2>Reserva de Turnos</h2>
-            <div class="profesionales-carousel">
-                {% for profesional in profesionales %}
-                <div class="profesional-card">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ profesional.nombre }}</h5>
-                        <div>
-                            <img width="48" height="48" src="https://img.icons8.com/color/48/styled-components.png" alt="styled-components"/>
-                            <p class="card-text">{{ profesional.especialidad }}</p>
-                        </div>
-                        <p class="card-text">{{ profesional.disponibilidad }}</p>
-                        <a href="{{ url_for('calendar_profesional', profesional_id=profesional.id) }}" class="btn">Reservar</a>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div> -->
+
 </main>
 <!-- Footer -->
     <!-- Footer -->

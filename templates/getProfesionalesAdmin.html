@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>NailsPro💅🏻</title>
+</head>
+<style>
+    /* fuentes */
+    @import url('https://fonts.googleapis.com/css2?family=Playwrite+AU+TAS:wght@100..400&family=Quicksand:wght@300..700&display=swap');
+ 
+ body, html {
+ height: 100%;
+ margin: 0;
+ font-family: "Quicksand", sans-serif;
+ font-optical-sizing: auto;
+ font-weight: weight;
+ font-style: normal;
+ }
+ 
+ .bg-container {
+ /* Background image */
+ background-image: url('https://images.unsplash.com/photo-1664794497169-5192dd09d5b6?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+ /* Full height */
+ height: 70vh;
+ /* Center and scale the image nicely */
+ background-position: center;
+ background-repeat: no-repeat;
+ background-size: cover;
+ /* Add the blur effect */
+ filter: blur(2px);
+ }
+ .content {
+ position: absolute;
+ top: 50%;
+ left: 50%;
+ transform: translate(-50%, -50%);
+ color: rgb(0, 0, 0);
+ text-align: center;
+ }
+ .overlay {
+ /* Full height */
+ height: 70vh;
+ /* Black background with opacity */
+ background-color: rgb(157 157 157 / 50%); /* Black see-through */
+ /* Centered */
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ position: absolute;
+ top: 0;
+ left: 0;
+ width: 100%;
+ }
+ .navbar-custom {
+     background-color: #f8f9fa;
+     border-bottom: 1px solid #e7e7e7;
+ }
+ .navbar-custom .navbar-brand img {
+     width: 40px;
+     height: 40px;
+ }
+ .navbar-custom .nav-link {
+     color: #333;
+     margin-right: 10px;
+ }
+ 
+ .navbar-custom .nav-link:hover {
+     color: #f48fb1;
+ }
+ /* footer */
+ .footer {
+ background-color: #f8f9fa;
+ border-top: 1px solid #e7e7e7;
+ padding: 20px 0;
+ }
+ .footer .social-icons a {
+ color: #333;
+ margin: 0 10px;
+ font-size: 24px;
+ }
+ .footer .social-icons a:hover {
+ color: #f48fb1;
+ }
+ .footer .footer-logo img {
+ width: 40px;
+ height: 40px;
+ }
+ .footer .footer-logo {
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ }
+ .footer .footer-logo span {
+ margin-left: 10px;
+ font-size: 18px;
+ font-weight: bold;
+ }
+ .footer .copyright,
+ .footer .credits {
+ text-align: center;
+ font-size: 14px;
+ margin-top: 10px;
+ color: #666;
+ }
+ .footer .credits {
+ font-size: 12px;
+ color: #777;
+ }
+ /* reserva turnos */
+ .container-turnos {
+             text-align: center;
+             padding: 20px;
+         }
+ 
+ .container-turnos p{
+     margin-top: 10vh;
+     font-size: smaller;
+     font-weight: 600;
+ 
+ }
+ 
+         .profesionales-carousel {
+            
+             overflow-x: auto;
+             
+             padding: 20px 0;
+             scroll-snap-type: x mandatory;
+         }
+
+         .profesionales-carousel form {
+            display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px
+         }
+ 
+         .profesional-card {
+             background: #fff;
+             border-radius: 8px;
+             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+             padding: 10px;
+             flex: 0 0 200px; /* Ancho de cada tarjeta */
+             text-align: left;
+             scroll-snap-align: center;
+             transition: transform 0.3s, box-shadow 0.3s;
+         }
+ 
+         .profesional-card:hover {
+             transform: translateY(-5px);
+             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+         }
+ 
+         .profesional-card img.avatar {
+             width: 50px;
+             height: 50px;
+             border-radius: 50%;
+             object-fit: cover;
+             margin-bottom: 10px;
+         }
+ 
+         .profesional-card img.nails {
+             width: 100%;
+             height: 80px;
+             object-fit: cover;
+             border-radius: 4px;
+         }
+ 
+         .card-title {
+             font-size: 1rem;
+             font-weight: bold;
+             margin: 10px 0 5px;
+         }
+ 
+         .card-text {
+             font-size: 0.9rem;
+             color: #666;
+             margin-bottom: 5px;
+         }
+ 
+         .card-body {
+             display: flex;
+             flex-direction: column;
+             align-items: center;
+         }
+
+         .card-body button{
+            padding: 4px;
+         }
+ 
+ /* tarjetas de profesionales */
+        .card-body li{
+     list-style-type: none;
+     font-size: x-small;
+     font-style: italic;
+     }
+ 
+      .card-body h5{
+      padding: 5px
+     }
+ 
+     .card-body a{
+         
+         width: 120px;
+         height: 36px;
+         color: #000;
+         background-color: rgba(255, 255, 255, 0);
+         border: 1px solid #000;
+         border-radius: 30px;
+         margin-top: 13px;
+         font-size: 13px;
+         font-weight: 700;
+         line-height: 16px;
+         transition: all .555s;
+     }
+ 
+     .card-body a:hover {
+         background-color: #f48fb1;
+     }
+ 
+         /* Estilos personalizados de la barra de desplazamiento */
+         .profesionales-carousel::-webkit-scrollbar {
+             height: 12px; /* Altura del scrollbar horizontal */
+             
+         }
+ 
+         .profesionales-carousel::-webkit-scrollbar-track {
+             background: transparent; /* Color del fondo del track */
+ 
+         }
+ 
+         .profesionales-carousel::-webkit-scrollbar-thumb {
+             background:#f48fb1; /* Color de la thumb (barra de desplazamiento) */
+             border-radius: 10px; /* Bordes redondeados para la thumb */
+ 
+         }
+ 
+         .profesionales-carousel::-webkit-scrollbar-thumb:hover {
+             background: black; /* Color de la thumb al pasar el cursor */
+         }
+ 
+     /* Responsive adjustments */
+     @media (max-width: 1024px) {
+         .profesional-card {
+             flex: 0 0 45%;
+             max-width: 45%;
+         }
+     }
+ 
+     @media (max-width: 768px) {
+         .profesional-card {
+             flex: 0 0 80%;
+             max-width: 80%;
+         }
+     }
+ 
+     @media (max-width: 480px) {
+         .profesional-card {
+             flex: 0 0 90%;
+             max-width: 90%;
+         }
+     }
+ </style>
+ <!-- header -->
+ <body>
+     <header class="fixed-top">
+         <nav class="navbar navbar-expand-lg navbar-custom">
+             <div class="container-fluid">
+                 <!-- Logo and Brand -->
+                 <a class="navbar-brand d-flex align-items-center" href="#">
+                     <img src="https://img.icons8.com/pulsar-color/96/nails.png" alt="Logo"/>
+                     <span class="ms-2 fw-bold">NailsPro</span>
+                 </a>
+                 <!-- Toggler/collapsible Button -->
+                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                     <span class="navbar-toggler-icon"></span>
+                 </button>
+                 <!-- Navbar links -->
+                 <div class="collapse navbar-collapse" id="navbarNav">
+                     <ul class="navbar-nav ms-auto">
+                         <li class="nav-item">
+                             <a class="nav-link">hola, {{ session['nombre'] }}</a>
+                         </li>
+                         <li class="nav-item">
+                             <a class="nav-link" href="{{ url_for('logout') }}"><img width="24" height="24" src="https://img.icons8.com/material-sharp/48/exit.png" alt="exit"/>Logout</a>
+                         </li>
+                     </ul>
+                 </div>
+             </div>
+         </nav>
+     </header>
+ <!-- Background Container -->
+ <div class="bg-container"></div>
+ <!-- Overlay Container -->
+ <div class="overlay">
+ <div class="content">
+     <h1>Welcome to NailsPro</h1>
+     <p>the art of manicure</p>
+ </div>
+ </div>
+   
+ <!-- main -->
+ <main>
+
+    <!-- <div class="container-turnos">
+        <p>❤️ profesionales disponibles</p>
+        <div class="profesionales-carousel">
+            <form action="{{ url_for('eliminar_profesional') }}" method="post">
+                {% for profesional in profesionales %}
+                <div class="profesional-card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ profesional.nombre }}</h5>
+                        <img class="nails" src="{{ profesional.especialidad_img }}" alt="uñas"/>
+                        <p class="card-text">{{ profesional.especialidad }}</p>
+                        <button type="submit" class="btn btn-danger" name="profesional_id" value="{{ profesional.id }}">
+                            Eliminar
+                        </button>
+                    </div>
+                </div>
+                {% endfor %}
+            </form>
+        </div>
+    </div> -->
+    <div class="container-table">
+        <h2>❤️ Profesionales Disponibles</h2>
+        <!-- Tabla de profesionales -->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Especialidad</th>
+                    <th scope="col">Disponibilidad</th>
+                    <th scope="col">Servicio Especial</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for profesional in profesionales %}
+                <tr>
+                    <th scope="row">{{ profesional.id }}</th>
+                    <td>{{ profesional.nombre }}</td>
+                    <td>{{ profesional.especialidad }}</td>
+                    <td>{{ profesional.disponibilidad }}</td>
+                    <td>{{ profesional.servicio_especial }}</td>
+                    <td>
+                        <form action="{{ url_for('eliminar_profesional') }}" method="post" style="display: inline;">
+                            <button type="submit" class="btn btn-danger" name="profesional_id" value="{{ profesional.id }}">
+                                Eliminar
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <!-- Mostrar mensajes flash -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class="flashes">
+                {% for category, message in messages %}
+                    <li class="flash {{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        {% endwith %}
+    </div>
+
+    <!--    Mostrar mensajes flash -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <ul class="flashes">
+            {% for category, message in messages %}
+                <li class="flash {{ category }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+   {% endwith %}
+
+
+    <!-- formulario agregar profesional -->
+    <h2> ❤️ Agregar Profesional</h2>
+    <form action="{{url_for('getProfesionalesAdmin')}}" method="post" enctype="multipart/form-data">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required><br><br>
+        
+        <label for="especialidad">Especialidad:</label>
+        <input type="text" id="especialidad" name="especialidad" required><br><br>
+        
+        <label for="disponibilidad">Disponibilidad:</label>
+        <input type="text" id="disponibilidad" name="disponibilidad" required><br><br>
+        
+        <label for="servicio_especial">Servicio Especial:</label>
+        <input type="text" id="servicio_especial" name="servicio_especial" required><br><br>
+        
+        <button type="submit">Agregar Profesional</button>
+    </form>
+ 
+ </main>
+     <!-- Footer -->
+     <footer class="footer">
+         <div class="container">
+             <div class="row">
+                 <!-- Logo -->
+                 <div class="col-md-4 d-flex justify-content-center mb-3 mb-md-0 footer-logo">
+                     <img src="https://img.icons8.com/pulsar-color/96/nails.png" alt="Logo"/>
+                     <span>NailsPro</span>
+                 </div>
+                 <!-- Social Icons -->
+                 <div class="col-md-4 d-flex justify-content-center mb-3 mb-md-0 social-icons">
+                     <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                         <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/github.png" alt="github"/>
+                     </a>
+                     <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+                         <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/linkedin.png" alt="linkedin"/>
+                     </a>
+                 </div>
+                 <!-- Copyright and Credits -->
+                 <div class="col-md-4 d-flex flex-column justify-content-center align-items-center">
+                     <p class="copyright mb-0">&copy; 2024 NailsPro. Todos los derechos reservados.</p>
+                     <p class="block text-sm credits">Made with ❤️ by Griselda Sanchez</p>
+                 </div>
+             </div>
+         </div>
+     </footer>
+ 
+         <!-- Bootstrap JS -->
+         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+ </body>
+
+</html>

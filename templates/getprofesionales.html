@@ -116,10 +116,12 @@ color: #777;
             padding: 20px;
         }
 
-        h2 {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-        }
+.container-turnos p{
+    margin-top: 10vh;
+    font-size: large;
+    font-weight: 600;
+
+}
 
         .profesionales-carousel {
             display: flex;
@@ -172,39 +174,57 @@ color: #777;
             margin-bottom: 5px;
         }
 
-        .btn {
-            display: inline-block;
-            padding: 8px 12px;
-            background: #007bff;
-            color: #fff;
-            text-align: center;
-            border-radius: 4px;
-            text-decoration: none;
-            font-size: 0.9rem;
-            margin-top: 10px;
-        }
-
-        .btn:hover {
-            background: #0056b3;
-        }
-
         .card-body {
             display: flex;
             flex-direction: column;
             align-items: center;
         }
+
+/* tarjetas de profesionales */
+       .card-body li{
+    list-style-type: none;
+    font-size: x-small;
+    font-style: italic;
+    }
+
+     .card-body h5{
+     padding: 5px
+    }
+
+    .card-body a{
+        
+        width: 120px;
+        height: 36px;
+        color: #000;
+        background-color: rgba(255, 255, 255, 0);
+        border: 1px solid #000;
+        border-radius: 30px;
+        margin-top: 13px;
+        font-size: 13px;
+        font-weight: 700;
+        line-height: 16px;
+        transition: all .555s;
+    }
+
+    .card-body a:hover {
+        background-color: #f48fb1;
+    }
+
         /* Estilos personalizados de la barra de desplazamiento */
         .profesionales-carousel::-webkit-scrollbar {
             height: 12px; /* Altura del scrollbar horizontal */
+            
         }
 
         .profesionales-carousel::-webkit-scrollbar-track {
             background: transparent; /* Color del fondo del track */
+
         }
 
         .profesionales-carousel::-webkit-scrollbar-thumb {
             background:#f48fb1; /* Color de la thumb (barra de desplazamiento) */
             border-radius: 10px; /* Bordes redondeados para la thumb */
+
         }
 
         .profesionales-carousel::-webkit-scrollbar-thumb:hover {
@@ -251,16 +271,10 @@ color: #777;
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('login') }}">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link register-btn" href="{{ url_for('new_cliente') }}" >Register</a>
+                            <a class="nav-link">hola, {{ session['nombre'] }}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('logout') }}"><img width="24" height="24" src="https://img.icons8.com/material-sharp/48/exit.png" alt="exit"/>Logout</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link">hola, {{ session['nombre'] }}</a>
                         </li>
                     </ul>
                 </div>

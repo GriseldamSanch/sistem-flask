@@ -184,7 +184,7 @@
 
             text-align: center;
             margin-top: 10vh;
-            
+            margin-bottom: 10vh;
         }
     /* formulario reserva turno */
     .turno-container{
@@ -198,14 +198,17 @@
         box-shadow: none;
         max-width: 400px;
         width: 100%;
-        margin: 5px auto;
+        margin: 10vh auto;
         flex-direction: column;
 }
 
 .turno-container p{
-    margin-bottom: 20px;
-        font-weight: bold;
-        text-align: center;
+    
+    /* margin-bottom: 20px; */
+    font-weight: 600;
+    text-align: center;
+    font-size: larger;
+    text-decoration-line: underline;
 }
 
 .turno-form{
@@ -214,6 +217,12 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
+}
+
+.turno-form select{
+    word-wrap: normal;
+    border: none;
+    text-align: center;
 }
 
 .turno-form input[type="date"]{
@@ -241,26 +250,50 @@
         line-height: 16px;
         transition: all .555s;
 }
-
 .turno-form button:hover{
   background-color: #f48fb1;
 }
+
+.return-prof {
+    text-decoration: none;
+    border: solid 1px black;
+    border-radius: 15px;
+    font-size: xx-small;
+    padding: 10px;
+    color: black;
+    font-weight: 800;
+    position: relative;
+    bottom: 15px;
+    left: 7px;
+
+}
+
+.return-prof:hover{
+    background-color: #f48fb1;
+}
+
+
+/* mensaje flash */
+    /* mensaje de error */
+    .flash-message {
+        margin: 10vh auto;
+    /* border: solid 1px black; */
+    background: transparent;
+    width: 30%;
+    font-size: x-small;
+        }
+
+    .flash-message button{
+
+        border: none;
+    background: transparent;
+    position: absolute;
+    bottom: 40px;
+    left: 380px;
+   
+    }
 </style>
-
 <body>
-    <div class="msj-container">
-        <!-- mensaje flash ya existe turno en esa fecha -->
-        {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-        <div>
-            {% for category, message in messages %}
-            <div class="alert alert-{{ category }}">{{ message }}</div>
-            {% endfor %}
-        </div>
-        {% endif %}
-        {% endwith %}
-    </div>
-
     <!-- header -->
     <header class="fixed-top">
         <nav class="navbar navbar-expand-lg navbar-custom">
@@ -279,17 +312,11 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('login') }}">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link register-btn" href="{{ url_for('new_cliente') }}">Register</a>
+                            <a class="nav-link">hola, {{ session['nombre'] }}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('logout') }}"><img width="24" height="24"
                                     src="https://img.icons8.com/material-sharp/48/exit.png" alt="exit" />Logout</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link">hola, {{ session['nombre'] }}</a>
                         </li>
                     </ul>
                 </div>
@@ -307,14 +334,14 @@
     </div>
     <!-- main -->
     <main>
-    <p class="title-turnos">📅 Turnos reservados de {{profName}}</p>
+    <p class="title-turnos">📅 Turnos de este mes reservados de {{profName}}</p>
     <!-- cards de turnos del profesional -->
        <div class="cards-container">
-        {% for turno in turnos %}
+        {% for turno in mes %}
         <div class="card">
             <div>
                 <div class="data-date">
-                    <p><strong>Fecha:</strong> {{ turno[2] }}</p>
+                    <p><strong>Fecha:</strong> {{ turno[2].strftime('%d-%m-%Y') }}</p>
                     <p><strong>Hora:</strong> {{ turno[3] }}</p>
                 </div>
             </div>
@@ -326,8 +353,22 @@
         </div>
         {% endfor %}
     </div>
+      <!-- mensaje flash ya existe turno en esa fecha -->
+      {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+      <div>
+          {% for category, message in messages %}
+          <div class="flash-message alert alert-{{ category }}">{{ message }}
+             <!-- boton de cierre bootstrap -->
+             <button type="button" class="close-btn" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          {% endfor %}
+      </div>
+      {% endif %}
+      {% endwith %}
    
-
     <div class="turno-container">
         <p class="title-reservar">Reserva el tuyo</p>
                 <!-- formulario de reservar turno -->
@@ -367,12 +408,14 @@
                 </form>
     </div>
 
+    
+        <a href="{{ url_for('getProfesionales')}}" class="return-prof">return to Profesionales</a>
+
+
+
+
+
     </main>
-
- 
-
-
-
 
     <!-- Footer -->
     <footer class="footer">
@@ -408,17 +451,21 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrapmin.js">
 
     </script>
-    <!--  limitar a partir de fecha actual     -->
+    
     <script>
+        //cierre de boton mensaje de error
+        const closeBtn = document.querySelector('.close-btn')
+        closeBtn.addEventListener('click', () => {
+            closeBtn.parentElement.style.display = 'none'
+        })
+
+        //limitar a partir de fecha actual 
         document.addEventListener('DOMContentLoaded', (event) => {
             // Obtener la fecha actual
             let today = new Date().toISOString().split('T')[0]
             document.getElementById('fecha').setAttribute('min', today)
         })
     </script>
-    <!-- Add Bootstrap JavaScript for the toggler to work -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umdpopper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrapmin.js"></script>
 
 </body>
 </html>

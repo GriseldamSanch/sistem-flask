@@ -9,7 +9,7 @@
     <title>NailsPro💅🏻</title>
 </head>
 <style>
-    /* fuentes */
+    /* fuente */
     @import url('https://fonts.googleapis.com/css2?family=Playwrite+AU+TAS:wght@100..400&family=Quicksand:wght@300..700&display=swap');
 
     body,
@@ -198,21 +198,37 @@
         text-decoration: underline;
     }
 
-    .alert {
-        border-radius: 4px;
-        margin-top: 10px;
-        font-size: x-small;
-    }
+    .flash-message {
+            /* display: none; Oculto por defecto */
+            padding: 10px;
+    margin: 10vh auto;
+    border: 1px solid #d9534f;
+    background-color: #f8d7da;
+    color: #721c24;
+    position: relative;
+    border-radius: 5px;
+    width: fit-content;
+    font-size: x-small;
+        }
+        .flash-message.show {
+            display: block; /* Mostrar cuando se agrega la clase 'show' */
+        }
+        .flash-message.fade {
+            opacity: 0; /* Aplicar fade out */
+            transition: opacity 0.5s ease-out;
+        }
+        .flash-message .close-btn {
+    background: transparent;
+    border: none;
+    position: absolute;
+    right: 0px;
+    bottom: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.2em;
+        }
 
-    .alert-dismissible .btn-close {
-        position: absolute;
-        top: -6px;
-        right: 5px;
-        z-index: 2;
-        width: 10px;
-        height: 10px;
-        border: none;
-    }
+
 </style>
 
 <body>
@@ -233,14 +249,10 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+                            <a class="nav-link" href="#login-container">Login</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link register-btn" href="{{ url_for('new_cliente') }}">Register</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('logout') }}"><img width="24" height="24"
-                                    src="https://img.icons8.com/material-sharp/48/exit.png" alt="exit" />Logout</a>
                         </li>
                     </ul>
                 </div>
@@ -258,8 +270,25 @@
     </div>
 
     <main>
+  <!-- mensaje de error usuario o contraseñas incorrectas -->
+  {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div>
+                {% for category, message in messages %}
+                    <div class="flash-message alert alert-{{ category }}">
+                        {{ message }}
+                        <!-- boton de cierre bootstrap -->
+                        <button type="button" class="close-btn" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
         <!-- Login Form -->
-        <div class="login-container">
+        <div class="login-container" id="login-container">
             <form action="/login" method="post" class="login-form">
                 <h5>Login</h5>
                 <!-- Campo Email -->
@@ -271,17 +300,9 @@
                 <button type="submit btn-login">Acceder</button>
                 <!-- Enlace de Registro -->
                 <a href="{{ url_for('new_cliente') }}" class="register-link">¿Nuevo usuario? Registrarse</a>
-                <!-- Mensaje de Error -->
-                {% if message %}
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong>Error: </strong>{{message}}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                {% endif %}
             </form>
         </div>
     </main>
-
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -310,12 +331,34 @@
             </div>
         </div>
     </footer>
-
-
-
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <!-- Flash Messages oculta msj tras 5 segundos. -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+        // Mostrar el mensaje flash
+        const flashMessage = document.querySelector('.flash-message')
+        if (flashMessage) {
+            flashMessage.classList.add('show')
+            // Ocultar después de 5 segundos (5000 milisegundos)
+            setTimeout(function() {
+                flashMessage.classList.remove('show')
+                flashMessage.classList.add('fade')
+            }, 5000)
+        }
+
+        // Añadir evento de clic al botón de cierre
+        const closeButton = document.querySelector('.flash-message .close-btn')
+        if (closeButton) {
+            closeButton.addEventListener('click', function() {
+                flashMessage.classList.remove('show')
+                flashMessage.classList.add('fade')
+            })
+        }
+    })
+ 
+    </script>
 </body>
 
 </html>

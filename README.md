@@ -26,15 +26,38 @@ se crea estilo para getPorfesionales.html
 
 ####
 
-crear nueva columna en tabla profesionales llamada imagen y colocar una imagen asociada a su especialidad.
+##### 25/06
+fix  ---> en login no se muestra el mjs de error usuario/contraseña incorrectos. se muestra el msj en la ruta profesionales/id   ✔
+fix ---> al ingresar al sistema no deben estar login y register en el header. ✔
+fix --> dar estilo a ruta profesionales. ✔
+fix --> reparar links de redes sociales del footer.
+fix --> reparar estilos en formulario de reserva de turnos. ✔
+fix --> arreglar los archivos de estilo. 
+fix --> arreglar msj de turno ya reservado en ruta profesionales/id ✔
+fix --> agregar turno reservado con exito.se arreglo el metodo agregar.turno(). ✔
+fix --> limitar hasta 1 mes la reserva de turno por profesional. se muestran los turnos reservados del mes actual. ✔
+fix --> se muestra fecha en template en formato dia-mes-año ✔
+fix --> agregar boton return profesionales ✔
 
-falta estilo formulario de registro.
-falta agregar clase administrador.
-crear columna en horarios_trabajo con servicio a realizar
-- error en la validacion de usuario ya registrado. template 
-- no deslogearse al hacer click en login del header
-- msj de ya existe turno existente agregar cierre darle estilo y que se muestre solo unos segundos
 
+que debe poder realizar el cliente:
+* para ingresar al sistema el cliente debe estar registrado.
+* para ingresar al sistema el cliente se debe logear
+* se debe mostrar el nombre del cliente que inicia sesion en el sistema.
+* el cliente podra elegir el profesional preferido y reservar un turno.
+------------ falta-----
+* el cliente debera PODER CANCELAR EL TURNO.
+* el cliente debera PODER SELECCIONAR LA FORMA DE PAGO: EFECTIVO O TARJETA.   (agregar columna forma_pagos en horarios_laboral), si es a tarjeta mostrar un pequeño modal con formulario de pago por ese medio ficticio.?  agregar terminos y condiciones de reserva de turnos y pago.
+
+----------------------falta
+el profesional debera logearse de forma especial para ingresar al sistema.
+podra ver sus turnos reservados y cambiarlos.
+-----------------------falta
+administrador:
+debera poder ver historial de turnos los clientes y cancelar sus turnos.
+debera poder ver y administrar a los profesionales (cambiar).
+debera poder cambiar los turnos de los profesionales.
+-------
 
 
 

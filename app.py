@@ -53,14 +53,15 @@ def login():
             session["nombre"] = user[1]
             # Guardado de id del cliente que inicia sesion
             session["cliente_id"] = user[0]
-            
             return redirect(url_for('getProfesionales')) # Redirige a la ruta turnos si coinciden los datos de la consulta
         else: 
             flash("Usuario o contraseña incorrectos", 'danger')
             return redirect(url_for('login')) # Redirige a la misma página para mostrar el mensaje de error
+        
     return render_template('index.html') # Muestra el formulario de login para solicitudes GET
    
     
+
 # TODO RUTA VER PROFESIONALES 
 @app.route('/profesionales', methods=['GET'])
 def getProfesionales():
@@ -92,20 +93,24 @@ def calendar_profesional(profesional_id):
             return redirect(url_for('calendar_profesional', profesional_id=profesional_id))
         #*---------------------------------------------
         # ID del cliente desde la sesión
-        cliente_id = session.get('cliente_id')
-
+        cliente_id = session.get('cliente_id') #! de clase Profesional
         #*----insercion de datos del formulario a la base de datos
-        Profesional.agregar_turno(mysql,profesional_id,fecha, hora_inicio,  cliente_id, 1, 'reservado',servicio) #!de clase Profesional
+        if Profesional.agregar_turno(mysql, profesional_id, fecha, hora_inicio, cliente_id, 1, 'reservado', servicio):
+            flash('Turno reservado con éxito', 'success')
+        else:
+            flash('Hubo un error al reservar el turno', 'error')
         return redirect(url_for('calendar_profesional', profesional_id=profesional_id))
-        #*--------------------------------------------------
 
+        #*--------------------------------------------------
     #*---- Obtén los turnos del profesional
     turnos = Profesional.obtener_turnos(mysql,profesional_id) #!de clase Profesional
     profName = Profesional.obtener_por_id(mysql,profesional_id).nombre #!de clase Profesional
     #*----------------------------------------
+    #!-----------------------test
+    mes = Profesional.mes_turnos(mysql,profesional_id)
+    print(mes)
     #*-----renderiza la plantilla calendarProf.html
-    return render_template('calendarProf.html', profesional_id=profesional_id, turnos=turnos,profName=profName)
-
+    return render_template('calendarProf.html', profesional_id=profesional_id, mes=mes,profName=profName)
 
 
 # TODO RUTA LOGOUT
@@ -138,7 +143,6 @@ def new_cliente():
             flash('Registro exitoso, inicia sesion', 'success')  # Añade el mensaje flash
             return redirect(url_for('new_cliente'))  # Redirige a la misma página para mostrar el mensaje
             #*-----------------------------------------------------
-        
     return render_template('new-cliente.html')
     
    

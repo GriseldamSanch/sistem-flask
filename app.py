@@ -25,9 +25,7 @@ app.config["MYSQL_DB"] = config.MYSQL_DB
 #--------------------------------------------------------------------------------------------------------------------------
 #*                                                  RUTAS
 #--------------------------------------------------------------------------------------------------------------------------
-""""
-ruta home renderiza la plantilla index.html
-"""
+
 # todo   RUTA HOME
 @app.route('/', methods=['GET']) 
 def home():
@@ -60,7 +58,32 @@ def login():
         
     return render_template('index.html') # Muestra el formulario de login para solicitudes GET
    
+#TODO RUTA ADMIN LOGIN
+
+@app.route('/admin_login', methods=['GET','POST']) 
+def admin_login():
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+        
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT id, nombre, email, password FROM administradores WHERE email = %s", (email,))
+        user = cur.fetchone()
+        cur.close()
+        
+        if user and user[3] == password:  # Comparación directa de contraseña (inseguro para producción)
+            session["email"] = email
+            session["nombre"] = user[1]
+            session["admin_id"] = user[0]
+            flash(f"bienvenido {session['nombre']}", 'success')
+            return redirect(url_for('getProfesionales'))
+        else: 
+            flash("Usuario o contraseña incorrectos", 'danger')
+            return redirect(url_for('admin_login'))
+    else:
+        return render_template('loginAdmin.html')
     
+
 
 # TODO RUTA VER PROFESIONALES 
 @app.route('/profesionales', methods=['GET'])
@@ -69,11 +92,7 @@ def getProfesionales():
     profesionales = Profesional.get_profesionales(mysql) #! de clase profesional
     return render_template('getProfesionales.html',profesionales=profesionales)
 
-"""
-TINYINT   ---> se utiliza en Myqsl para almacenar valores binarios y booleanos.
-0: Representa FALSE.
-1: Representa TRUE.
-"""
+
 #TODO  RUTA MOSTRAR DISPONIBILIDAD Y TURNOS POR PROFESIONAL
 @app.route('/profesionales/<int:profesional_id>', methods=['GET','POST'])
 def calendar_profesional(profesional_id):
@@ -108,7 +127,6 @@ def calendar_profesional(profesional_id):
     #*----------------------------------------
     #!-----------------------test
     mes = Profesional.mes_turnos(mysql,profesional_id)
-    print(mes)
     #*-----renderiza la plantilla calendarProf.html
     return render_template('calendarProf.html', profesional_id=profesional_id, mes=mes,profName=profName)
 
@@ -146,6 +164,9 @@ def new_cliente():
     return render_template('new-cliente.html')
     
    
+
+
+
 
 
 

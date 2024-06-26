@@ -272,7 +272,6 @@
     background-color: #f48fb1;
 }
 
-
 /* mensaje flash */
     /* mensaje de error */
     .flash-message {
@@ -284,8 +283,7 @@
         }
 
     .flash-message button{
-
-        border: none;
+    border: none;
     background: transparent;
     position: absolute;
     bottom: 40px;
@@ -402,21 +400,14 @@
                         <option value="manicuria rusa">manicuria rusa</option>
                         <option value="retirado">retirado</option>
                         <option value="service">service</option>
-                        <option value="pedicuria"></option>
+                        <option value="pedicuria">Pedicuria</option>
                     </select>
                         <button type="submit">Reservar Turno</button>
                 </form>
     </div>
-
-    
+<!-- boton para volver -->
         <a href="{{ url_for('getProfesionales')}}" class="return-prof">return to Profesionales</a>
-
-
-
-
-
     </main>
-
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -446,25 +437,28 @@
         </div>
     </footer>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umdpopper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrapmin.js">
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 
-    </script>
-    
     <script>
+
+        //limitar a partir de fecha actual 
+        document.addEventListener('DOMContentLoaded', (event) => {
+    // Obtener la fecha actual
+    let today = new Date().toISOString().split('T')[0]
+    document.getElementById('fecha').setAttribute('min', today)
+})
+
         //cierre de boton mensaje de error
         const closeBtn = document.querySelector('.close-btn')
         closeBtn.addEventListener('click', () => {
             closeBtn.parentElement.style.display = 'none'
         })
 
-        //limitar a partir de fecha actual 
-        document.addEventListener('DOMContentLoaded', (event) => {
-            // Obtener la fecha actual
-            let today = new Date().toISOString().split('T')[0]
-            document.getElementById('fecha').setAttribute('min', today)
-        })
+
+
+
     </script>
 
 </body>

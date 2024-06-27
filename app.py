@@ -129,7 +129,6 @@ def allowed_file(filename):
         
         
         
-
 # TODO RUTA VER PROFESIONALES 
 @app.route('/profesionales', methods=['GET'])
 def getProfesionales():
@@ -225,7 +224,7 @@ def turnos_cliente():
         return redirect(url_for('turnos_cliente'))  # Redirigir para refrescar la lista de turnos
     # Manejar la obtención de turnos
     if cliente_id:
-        turno_cliente = Cliente.get_turnos(mysql, cliente_id)
+        turno_cliente = Cliente.get_turnos(mysql, cliente_id) 
     else:
         turno_cliente = []
     return render_template("turnos_cliente.html", turno_cliente=turno_cliente)

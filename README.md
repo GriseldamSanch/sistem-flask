@@ -63,4 +63,69 @@ debera poder cambiar los turnos de los profesionales.
 
 
 
+dar estilo al template de los profesionales del admin.
+reparar link del login del login admin.
+reparar msj de bienvenido administrador
 
+
+
+
+el administrador debe poder:
+eliminar profesional  --- hecho---
+agregar profesional   --hecho--
+
+
+el profesional debe poder:  --no llego--
+ver sus turnos diponibles.  --no llego--
+
+
+el cliente debe poder:
+reservar turno
+cancelar turno
+elegir metodo de pago
+
+reparar el metodo del admi para incorporar especialidad_img y pueda cargar una imagen al nuevo profesional.
+
+
+
+### 27/08
+fix --> se agrega metodo nuevo_cliente() de clase Cliente en la ruta new_cliente().
+fix --> se agrega clase Turno para gestionar y mostrar los turnos reservado del cliente.
+fix ---> se agrega ruta turnos_clientes para mostrar los turnos reservados del cliente
+fix --> se agrega en la ruta turnos_cliente para eliminar los turnos reservados del cliente.
+
+
+- agregar en el nombre de sesion del cliente la ruta para ver y modificar en los templates que correspondan.
+-ordenar en el folder static los archivos css.
+- modular eliminar turnos desde la clase Cliente.
+- agregar en el template para msj flash.
+- mostrar en cada profesional " sin turnos reservados " cuando no tengan turnos reservados.
+- eliminar de cada profesional o traer con algun fetch(si llego) una imagen aletoria.
+- dar estilo a pagina de lista de profesionales de admin.
+- muestra dos veces bienvenido admin, y se muestra debajo de la lista de profesionales.
+- agregar medio de pagos de parte del cliente en reserva de turnos.
+- reparar estilo del msj de registro exitoso de nuevo cliente y que redirecciones a la pagina de login (ruta)
+- agregar texto selecciona un profesional en ruta profesionales.
+- dar estilo a la ruta de visualizacion y cancelacion de turnos.
+- agregar lista de precios
+
+
+
+repaso:
+ingreso al sistema con login ok
+muestra de msj de error ok
+
+registro de nuevo cliente ok
+muestra de msj de registro exitoso ok (debe dar estilo)
+
+seleccion de profesional para reserva de turno  ok
+reserva de turno  ok
+muestra de msj de reserva de turno ok
+muestra de turnos reservados del mes del profesional ok
+ingreso a la ruta cliente_turnos  ok
+muestra de turnos reservados por el cliente ok
+cancelacion turno ok
+muestra de msj de cancelacion exitosa ok
+
+
+medio de pago:  efectivo en local

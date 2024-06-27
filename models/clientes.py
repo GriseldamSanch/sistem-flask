@@ -44,11 +44,11 @@ class Cliente:
     def get_turnos(cls, mysql, cliente_id):
         try:
             cur = mysql.connection.cursor()
-            cur.execute("SELECT profesional_id, fecha, hora_inicio, servicio FROM horarios_trabajo WHERE cliente_id = %s", (cliente_id,))
+            cur.execute("SELECT turno_id, profesional_id, fecha, hora_inicio, servicio FROM horarios_trabajo WHERE cliente_id = %s", (cliente_id,))
             turnos_client = cur.fetchall()
             cur.close()
             
-            turnos_cliente = [Turno(turno[0], turno[1], turno[2], turno[3]) for turno in turnos_client]
+            turnos_cliente = [Turno(turno[0], turno[1], turno[2], turno[3], turno[4]) for turno in turnos_client]
             return turnos_cliente
         except Exception as e:
             print(f"Error al obtener turnos: {e}")

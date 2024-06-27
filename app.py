@@ -208,6 +208,22 @@ def new_cliente():
 @app.route('/cliente_turnos',methods=['GET', 'POST'])
 def turnos_cliente():
     cliente_id = session.get("cliente_id")
+    if request.method == 'POST':
+        # Manejar la cancelación del turno
+        turno_id = request.form.get('turno_id')
+        if turno_id and cliente_id:
+            try:
+                cur = mysql.connection.cursor()
+                cur.execute("DELETE FROM horarios_trabajo WHERE turno_id = %s AND cliente_id = %s", (turno_id, cliente_id))
+                mysql.connection.commit()
+                cur.close()
+                print("turno cancelado")
+                flash("Turno cancelado exitosamente.", "success")
+            except Exception as e:
+                print(f"Error al cancelar el turno: {e}")
+                flash("Hubo un problema al cancelar el turno.", "danger")
+        return redirect(url_for('turnos_cliente'))  # Redirigir para refrescar la lista de turnos
+    # Manejar la obtención de turnos
     if cliente_id:
         turno_cliente = Cliente.get_turnos(mysql, cliente_id)
     else:

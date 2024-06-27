@@ -10,13 +10,30 @@
     <title>NailsPro💅🏻</title>
 </head>
 
+<style>
+    .bg-container {
+    /* Background image */
+    background-image: url('https://images.unsplash.com/photo-1632345031435-8727f6897d53?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    /* Full height */
+    height: 70vh;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* Add the blur effect */
+    filter: blur(2px);
+}
+
+</style>
+
+
 <!-- header -->
 <body>
     <header class="fixed-top">
         <nav class="navbar navbar-expand-lg navbar-custom">
             <div class="container-fluid">
                 <!-- Logo and Brand -->
-                <a class="navbar-brand d-flex align-items-center" href="#">
+                <a class="navbar-brand d-flex align-items-center" href="{{url_for('home')}}">
                     <img src="https://img.icons8.com/pulsar-color/96/nails.png" alt="Logo"/>
                     <span class="ms-2 fw-bold">NailsPro</span>
                 </a>
@@ -127,7 +144,7 @@
                         <!-- Imagen de uñas -->
                         <img class="nails" src="{{ profesional.especialidad_img }}"  alt="uñas"/>
                         <!-- Información del profesional -->
-                        <p class="card-text">{{ profesional.especialidad }}</p>
+                        <p class="card-text" style="font-size: smaller;">{{ profesional.especialidad }}</p>
                         <li class="card-text">{{ profesional.servicio_especial }}</li>
                         <!-- Botón de reserva -->
                         <a href="{{ url_for('calendar_profesional', profesional_id=profesional.id) }}" class="btn">Reservar</a>

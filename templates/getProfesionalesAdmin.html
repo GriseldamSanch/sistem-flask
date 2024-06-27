@@ -303,26 +303,6 @@
    
  <!-- main -->
  <main>
-
-    <!-- <div class="container-turnos">
-        <p>❤️ profesionales disponibles</p>
-        <div class="profesionales-carousel">
-            <form action="{{ url_for('eliminar_profesional') }}" method="post">
-                {% for profesional in profesionales %}
-                <div class="profesional-card">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ profesional.nombre }}</h5>
-                        <img class="nails" src="{{ profesional.especialidad_img }}" alt="uñas"/>
-                        <p class="card-text">{{ profesional.especialidad }}</p>
-                        <button type="submit" class="btn btn-danger" name="profesional_id" value="{{ profesional.id }}">
-                            Eliminar
-                        </button>
-                    </div>
-                </div>
-                {% endfor %}
-            </form>
-        </div>
-    </div> -->
     <div class="container-table">
         <h2>❤️ Profesionales Disponibles</h2>
         <!-- Tabla de profesionales -->
@@ -356,17 +336,6 @@
                 {% endfor %}
             </tbody>
         </table>
-        <!-- Mostrar mensajes flash -->
-        {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            <ul class="flashes">
-                {% for category, message in messages %}
-                    <li class="flash {{ category }}">{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-        {% endwith %}
-    </div>
 
     <!--    Mostrar mensajes flash -->
     {% with messages = get_flashed_messages(with_categories=true) %}
@@ -378,7 +347,6 @@
         </ul>
     {% endif %}
    {% endwith %}
-
 
     <!-- formulario agregar profesional -->
     <h2> ❤️ Agregar Profesional</h2>
@@ -394,6 +362,9 @@
         
         <label for="servicio_especial">Servicio Especial:</label>
         <input type="text" id="servicio_especial" name="servicio_especial" required><br><br>
+
+        <label for="servicio_especial">Cargar Imagen:</label>
+        <input type="text" id="especialidad_img" name="especialidad_img" required><br><br>
         
         <button type="submit">Agregar Profesional</button>
     </form>

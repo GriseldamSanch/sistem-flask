@@ -98,8 +98,10 @@ def getProfesionalesAdmin():
         especialidad = request.form['especialidad']
         disponibilidad = request.form['disponibilidad']
         servicio_especial = request.form['servicio_especial']
+        especialidad_img = request.form['especialidad_img']
 
-        new_prof = Admin.agregar_profesional(mysql, nombre, especialidad, disponibilidad, servicio_especial)
+       #agregar profesional
+        new_prof = Admin.agregar_profesional(mysql, nombre, especialidad, disponibilidad, servicio_especial,especialidad_img)
         if new_prof:
             flash('Profesional agregado exitosamente.')
             return redirect(url_for('getProfesionalesAdmin'))

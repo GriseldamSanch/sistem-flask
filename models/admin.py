@@ -13,13 +13,13 @@ class Admin:
         self.password =  password   
 
     @classmethod
-    def agregar_profesional(cls, mysql, nombre, especialidad, disponibilidad, servicio_especial):
+    def agregar_profesional(cls, mysql, nombre, especialidad, disponibilidad, servicio_especial, especialidad_img):
         try:
             cur = mysql.connection.cursor()
             cur.execute("""
-                INSERT INTO profesionales (nombre, especialidad, disponibilidad, servicio_especial) 
-                VALUES (%s, %s, %s, %s)
-            """, (nombre, especialidad, disponibilidad, servicio_especial))
+                INSERT INTO profesionales (nombre, especialidad, disponibilidad, servicio_especial,especialidad_img) 
+                VALUES (%s, %s, %s, %s, %s)
+            """, (nombre, especialidad, disponibilidad, servicio_especial, especialidad_img))
             mysql.connection.commit()
             cur.close()
             return True

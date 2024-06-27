@@ -3,256 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/style.css">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
     <title>NailsPro💅🏻</title>
 </head>
-<style>
-   /* fuentes */
-   @import url('https://fonts.googleapis.com/css2?family=Playwrite+AU+TAS:wght@100..400&family=Quicksand:wght@300..700&display=swap');
 
-body, html {
-height: 100%;
-margin: 0;
-font-family: "Quicksand", sans-serif;
-font-optical-sizing: auto;
-font-weight: weight;
-font-style: normal;
-}
-
-.bg-container {
-/* Background image */
-background-image: url('https://images.unsplash.com/photo-1664794497169-5192dd09d5b6?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-/* Full height */
-height: 70vh;
-/* Center and scale the image nicely */
-background-position: center;
-background-repeat: no-repeat;
-background-size: cover;
-/* Add the blur effect */
-filter: blur(2px);
-}
-.content {
-position: absolute;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
-color: rgb(0, 0, 0);
-text-align: center;
-}
-.overlay {
-/* Full height */
-height: 70vh;
-/* Black background with opacity */
-background-color: rgb(157 157 157 / 50%); /* Black see-through */
-/* Centered */
-display: flex;
-justify-content: center;
-align-items: center;
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-}
-.navbar-custom {
-    background-color: #f8f9fa;
-    border-bottom: 1px solid #e7e7e7;
-}
-.navbar-custom .navbar-brand img {
-    width: 40px;
-    height: 40px;
-}
-.navbar-custom .nav-link {
-    color: #333;
-    margin-right: 10px;
-}
-
-.navbar-custom .nav-link:hover {
-    color: #f48fb1;
-}
-/* footer */
-.footer {
-background-color: #f8f9fa;
-border-top: 1px solid #e7e7e7;
-padding: 20px 0;
-}
-.footer .social-icons a {
-color: #333;
-margin: 0 10px;
-font-size: 24px;
-}
-.footer .social-icons a:hover {
-color: #f48fb1;
-}
-.footer .footer-logo img {
-width: 40px;
-height: 40px;
-}
-.footer .footer-logo {
-display: flex;
-align-items: center;
-justify-content: center;
-}
-.footer .footer-logo span {
-margin-left: 10px;
-font-size: 18px;
-font-weight: bold;
-}
-.footer .copyright,
-.footer .credits {
-text-align: center;
-font-size: 14px;
-margin-top: 10px;
-color: #666;
-}
-.footer .credits {
-font-size: 12px;
-color: #777;
-}
-/* reserva turnos */
-.container-turnos {
-            text-align: center;
-            padding: 20px;
-        }
-
-.container-turnos p{
-    margin-top: 10vh;
-    font-size: large;
-    font-weight: 600;
-
-}
-
-        .profesionales-carousel {
-            display: flex;
-            overflow-x: auto;
-            gap: 10px;
-            padding: 20px 0;
-            scroll-snap-type: x mandatory;
-        }
-
-        .profesional-card {
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 10px;
-            flex: 0 0 200px; /* Ancho de cada tarjeta */
-            text-align: left;
-            scroll-snap-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .profesional-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
-
-        .profesional-card img.avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 10px;
-        }
-
-        .profesional-card img.nails {
-            width: 100%;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 4px;
-        }
-
-        .card-title {
-            font-size: 1rem;
-            font-weight: bold;
-            margin: 10px 0 5px;
-        }
-
-        .card-text {
-            font-size: 0.9rem;
-            color: #666;
-            margin-bottom: 5px;
-        }
-
-        .card-body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-/* tarjetas de profesionales */
-       .card-body li{
-    list-style-type: none;
-    font-size: x-small;
-    font-style: italic;
-    }
-
-     .card-body h5{
-     padding: 5px
-    }
-
-    .card-body a{
-        
-        width: 120px;
-        height: 36px;
-        color: #000;
-        background-color: rgba(255, 255, 255, 0);
-        border: 1px solid #000;
-        border-radius: 30px;
-        margin-top: 13px;
-        font-size: 13px;
-        font-weight: 700;
-        line-height: 16px;
-        transition: all .555s;
-    }
-
-    .card-body a:hover {
-        background-color: #f48fb1;
-    }
-
-        /* Estilos personalizados de la barra de desplazamiento */
-        .profesionales-carousel::-webkit-scrollbar {
-            height: 12px; /* Altura del scrollbar horizontal */
-            
-        }
-
-        .profesionales-carousel::-webkit-scrollbar-track {
-            background: transparent; /* Color del fondo del track */
-
-        }
-
-        .profesionales-carousel::-webkit-scrollbar-thumb {
-            background:#f48fb1; /* Color de la thumb (barra de desplazamiento) */
-            border-radius: 10px; /* Bordes redondeados para la thumb */
-
-        }
-
-        .profesionales-carousel::-webkit-scrollbar-thumb:hover {
-            background: black; /* Color de la thumb al pasar el cursor */
-        }
-
-    /* Responsive adjustments */
-    @media (max-width: 1024px) {
-        .profesional-card {
-            flex: 0 0 45%;
-            max-width: 45%;
-        }
-    }
-
-    @media (max-width: 768px) {
-        .profesional-card {
-            flex: 0 0 80%;
-            max-width: 80%;
-        }
-    }
-
-    @media (max-width: 480px) {
-        .profesional-card {
-            flex: 0 0 90%;
-            max-width: 90%;
-        }
-    }
-</style>
 <!-- header -->
 <body>
     <header class="fixed-top">
@@ -271,7 +28,7 @@ color: #777;
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link">hola, {{ session['nombre'] }}</a>
+                            <a class="nav-link" href="{{url_for('turnos_cliente')}}">hola, {{ session['nombre'] }}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('logout') }}"><img width="24" height="24" src="https://img.icons8.com/material-sharp/48/exit.png" alt="exit"/>Logout</a>
@@ -290,17 +47,81 @@ color: #777;
     <p>the art of manicure</p>
 </div>
 </div>
-  
 <!-- main -->
     <main>
+
+        <p class="title-precios">Nuestros precios</p>
+
+        <div class="container-fluid precios">
+            <div class="card precios-card">
+                <div class="card-body">
+                    <h5 class="card-title">Esmalte Semipermanente</h5>
+                    <p class="card-text p-precios"><img width="48" height="48" src="https://img.icons8.com/color/48/price-tag-usd--v1.png" alt="price-tag-usd--v1"/> Precio: $7000</p>
+                </div>
+            </div>
+            <div class="card precios-card">
+                <div class="card-body">
+                    <h5 class="card-title">Kapping Gel</h5>
+                    <p class="card-text p-precios"><img width="48" height="48" src="https://img.icons8.com/color/48/price-tag-usd--v1.png" alt="price-tag-usd--v1"/> Precio: $12000</p>
+                </div>
+           </div>
+            <div class="card precios-card">
+                <div class="card-body">
+                    <h5 class="card-title">Uñas esculpidas + Kapping Gel</h5>
+                    <p class="card-text p-precios"><img width="48" height="48" src="https://img.icons8.com/color/48/price-tag-usd--v1.png" alt="price-tag-usd--v1"/> Precio: $15000</p>
+                </div>
+            </div>
+            <div class="card precios-card">
+                <div class="card-body">
+                    <h5 class="card-title">Full Deco</h5>
+                    <p class="card-text p-precios"><img width="48" height="48" src="https://img.icons8.com/color/48/price-tag-usd--v1.png" alt="price-tag-usd--v1"/>Precio: $18000</p>
+                </div>
+            </div>
+            <div class="card precios-card">
+                <div class="card-body">
+                    <h5 class="card-title">Uñas esculpidas + Nails Art</h5>
+                    <p class="card-text p-precios"><img width="48" height="48" src="https://img.icons8.com/color/48/price-tag-usd--v1.png" alt="price-tag-usd--v1"/> Precio: $20000</p>
+                </div>
+            </div>
+            <div class="card precios-card">
+                <div class="card-body">
+                    <h5 class="card-title">Kapping Gel + Nails Art </h5>
+                    <p class="card-text p-precios"><img width="48" height="48" src="https://img.icons8.com/color/48/price-tag-usd--v1.png" alt="price-tag-usd--v1"/> Precio: $18000</p>
+                </div>
+              
+            </div>
+            <div class="card precios-card">
+                <div class="card-body">
+                    <h5 class="card-title">Manicuria Rusa</h5>
+                    <p class="card-text p-precios"><img width="48" height="48" src="https://img.icons8.com/color/48/price-tag-usd--v1.png" alt="price-tag-usd--v1"/> Precio: $8000</p>
+                </div>
+            </div>
+            <div class="card precios-card">
+                <div class="card-body">
+                    <h5 class="card-title">Retirado de servicio</h5>
+                    <p class="card-text p-precios"><img width="48" height="48" src="https://img.icons8.com/color/48/price-tag-usd--v1.png" alt="price-tag-usd--v1"/> Precio: $8500</p>
+                </div>
+            </div>
+            <div class="card precios-card">
+                <div class="card-body">
+                    <h5 class="card-title">Service</h5>
+                    <p class="card-text p-precios"><img width="48" height="48" src="https://img.icons8.com/color/48/price-tag-usd--v1.png" alt="price-tag-usd--v1"/> Precio: $8000</p>
+                </div>
+            </div>
+            <div class="card precios-card">
+                <div class="card-body">
+                    <h5 class="card-title">Pedicuria</h5>
+                    <p class="card-text p-precios"><img width="48" height="48" src="https://img.icons8.com/color/48/price-tag-usd--v1.png" alt="price-tag-usd--v1"/> Precio: $9000</p>
+                </div>
+            </div>
+        </div>
+<!-- /// -->
         <div class="container-turnos">
             <p>❤️ Nuestros profesionales</p>
             <div class="profesionales-carousel">
                 {% for profesional in profesionales %}
                 <div class="profesional-card">
                     <div class="card-body">
-                        <!-- Avatar del profesional -->
-                        <!-- <img class="avatar" src="https://img.icons8.com/color/48/user.png" alt="avatar"/> -->
                         <!-- Título del nombre -->
                         <h5 class="card-title">{{ profesional.nombre }}</h5>
                         <!-- Imagen de uñas -->

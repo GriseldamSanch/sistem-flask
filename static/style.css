@@ -1,0 +1,264 @@
+/* fuente */
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+AU+TAS:wght@100..400&family=Quicksand:wght@300..700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: weight;
+    font-style: normal;
+
+}
+
+body, html {
+        height: 100%;
+    }
+
+/*============================================
+ *             Header
+ *=============================================**/
+
+    .bg-container {
+        /* Background image */
+        background-image: url('https://images.unsplash.com/photo-1544816135-b44f18b3c5d6?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+        /* Full height */
+        height: 70vh;
+        /* Center and scale the image nicely */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        /* Add the blur effect */
+        filter: blur(2px);
+    }
+
+
+    /* Estilo general de la barra de desplazamiento */
+::-webkit-scrollbar {
+    width: 12px;  /* Ancho de la barra de desplazamiento vertical */
+    height: 12px; /* Altura de la barra de desplazamiento horizontal */
+  }
+  
+  /* Fondo de la barra de desplazamiento */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Color del fondo */
+  }
+  
+  /* Color del "pulgar" de la barra de desplazamiento (la parte que se mueve) */
+  ::-webkit-scrollbar-thumb {
+    background: #888; /* Color del pulgar */
+    border-radius: 6px; /* Bordes redondeados */
+  }
+  
+  /* Color del pulgar al pasar el cursor por encima */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Color del pulgar al hacer hover */
+  }
+  
+  /* Color de la esquina de la barra de desplazamiento (cuando hay tanto scroll horizontal como vertical) */
+  ::-webkit-scrollbar-corner {
+    background: #f1f1f1; /* Color de la esquina */
+  }
+
+    .content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: rgb(0, 0, 0);
+        text-align: center;
+    }
+
+    .overlay {
+        /* Full height */
+        height: 70vh;
+        /* Black background with opacity */
+        background-color: rgb(157 157 157 / 50%);
+        /* Black see-through */
+        /* Centered */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+
+    .navbar-custom {
+        background-color: #f8f9fa;
+        border-bottom: 1px solid #e7e7e7;
+    }
+
+    .navbar-custom .navbar-brand img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .navbar-custom .nav-link {
+        color: #333;
+        margin-right: 10px;
+    }
+
+    .navbar-custom .nav-link:hover {
+        color: #f48fb1;
+    }
+/*========================================================================
+ *                           footer
+ *========================================================================**/
+    /* footer */
+    .footer {
+        background-color: #f8f9fa;
+        border-top: 1px solid #e7e7e7;
+        padding: 20px 0;
+    }
+
+    .footer .social-icons a {
+        color: #333;
+        margin: 0 10px;
+        font-size: 24px;
+    }
+
+    .footer .social-icons a:hover {
+        color: #f48fb1;
+    }
+
+    .footer .footer-logo img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .footer .footer-logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .footer .footer-logo span {
+        margin-left: 10px;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .footer .copyright,
+    .footer .credits {
+        text-align: center;
+        font-size: 14px;
+        margin-top: 10px;
+        color: #666;
+    }
+
+    .footer .credits {
+        font-size: 12px;
+        color: #777;
+    }
+
+/**======================
+ *    index.html
+ *========================**/
+     /* formulario login*/
+     .login-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /* height: 100vh; */
+        background: rgba(255, 255, 255, 0.8);
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: none;
+        max-width: 400px;
+        width: 100%;
+        margin: 5px auto;
+    }
+
+    .login-form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .login-form h4,
+    .login-form h5 {
+        margin-bottom: 20px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .login-form input[type="email"],
+    .login-form input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: none;
+        border-bottom: 1px solid #000000;
+        border-radius: 0;
+        background: transparent;
+        outline: none;
+    }
+
+    .login-form button {
+        width: 120px;
+        height: 48px;
+        color: #000;
+        background-color: rgba(255, 255, 255, 0);
+        border: 1px solid #000;
+        border-radius: 30px;
+        margin-top: 13px;
+        font-size: 13px;
+        font-weight: 700;
+        line-height: 16px;
+        transition: all .555s;
+    }
+
+    .login-form button:hover {
+        background-color: #f48fb1;
+    }
+
+    .register-link {
+        display: block;
+        text-align: center;
+        margin-top: 20px;
+        color: black;
+        text-decoration: none;
+    }
+
+    .register-link:hover {
+        text-decoration: underline;
+    }
+
+    .flash-message {
+    /* display: none;  */
+            padding: 10px;
+    margin: 10vh auto;
+    border: 1px solid #d9534f;
+    background-color: #f8d7da;
+    color: #721c24;
+    position: relative;
+    border-radius: 5px;
+    width: fit-content;
+    font-size: x-small;
+        }
+        .flash-message.show {
+            display: block; /* Mostrar cuando se agrega la clase 'show' */
+        }
+        .flash-message.fade {
+            opacity: 0; /* Aplicar fade out */
+            transition: opacity 0.5s ease-out;
+        }
+
+    .flash-message .close-btn {
+    background: transparent;
+    border: none;
+    position: relative;
+    left: 15px;
+    bottom: 25px;
+    /* cursor: pointer; */
+    font-weight: bold;
+    font-size: 1.2em;
+}
+        
+
+  

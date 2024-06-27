@@ -4,239 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/style.css">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>NailsPro💅🏻</title>
 </head>
-<style>
-    /* fuente */
-    @import url('https://fonts.googleapis.com/css2?family=Playwrite+AU+TAS:wght@100..400&family=Quicksand:wght@300..700&display=swap');
-
-    body,
-    html {
-        height: 100%;
-        margin: 0;
-        font-family: "Quicksand", sans-serif;
-        font-optical-sizing: auto;
-        font-weight: weight;
-        font-style: normal;
-    }
-
-    .bg-container {
-        /* Background image */
-        background-image: url('https://images.unsplash.com/photo-1544816135-b44f18b3c5d6?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-        /* Full height */
-        height: 70vh;
-        /* Center and scale the image nicely */
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        /* Add the blur effect */
-        filter: blur(2px);
-    }
-
-    .content {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        color: rgb(0, 0, 0);
-        text-align: center;
-    }
-
-    .overlay {
-        /* Full height */
-        height: 70vh;
-        /* Black background with opacity */
-        background-color: rgb(157 157 157 / 50%);
-        /* Black see-through */
-        /* Centered */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-    }
-
-    .navbar-custom {
-        background-color: #f8f9fa;
-        border-bottom: 1px solid #e7e7e7;
-    }
-
-    .navbar-custom .navbar-brand img {
-        width: 40px;
-        height: 40px;
-    }
-
-    .navbar-custom .nav-link {
-        color: #333;
-        margin-right: 10px;
-    }
-
-    .navbar-custom .nav-link:hover {
-        color: #f48fb1;
-    }
-
-    /* footer */
-    .footer {
-        background-color: #f8f9fa;
-        border-top: 1px solid #e7e7e7;
-        padding: 20px 0;
-    }
-
-    .footer .social-icons a {
-        color: #333;
-        margin: 0 10px;
-        font-size: 24px;
-    }
-
-    .footer .social-icons a:hover {
-        color: #f48fb1;
-    }
-
-    .footer .footer-logo img {
-        width: 40px;
-        height: 40px;
-    }
-
-    .footer .footer-logo {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .footer .footer-logo span {
-        margin-left: 10px;
-        font-size: 18px;
-        font-weight: bold;
-    }
-
-    .footer .copyright,
-    .footer .credits {
-        text-align: center;
-        font-size: 14px;
-        margin-top: 10px;
-        color: #666;
-    }
-
-    .footer .credits {
-        font-size: 12px;
-        color: #777;
-    }
-
-    /* formulario login*/
-    .login-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        /* height: 100vh; */
-        background: rgba(255, 255, 255, 0.8);
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: none;
-        max-width: 400px;
-        width: 100%;
-        margin: 5px auto;
-    }
-
-    .login-form {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .login-form h4,
-    .login-form h5 {
-        margin-bottom: 20px;
-        font-weight: bold;
-        text-align: center;
-    }
-
-    .login-form input[type="email"],
-    .login-form input[type="password"] {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 20px;
-        border: none;
-        border-bottom: 1px solid #000000;
-        border-radius: 0;
-        background: transparent;
-        outline: none;
-    }
-
-    .login-form button {
-        width: 120px;
-        height: 48px;
-        color: #000;
-        background-color: rgba(255, 255, 255, 0);
-        border: 1px solid #000;
-        border-radius: 30px;
-        margin-top: 13px;
-        font-size: 13px;
-        font-weight: 700;
-        line-height: 16px;
-        transition: all .555s;
-    }
-
-    .login-form button:hover {
-        background-color: #f48fb1;
-    }
-
-    .register-link {
-        display: block;
-        text-align: center;
-        margin-top: 20px;
-        color: black;
-        text-decoration: none;
-    }
-
-    .register-link:hover {
-        text-decoration: underline;
-    }
-
-    .flash-message {
-            /* display: none; Oculto por defecto */
-            padding: 10px;
-    margin: 10vh auto;
-    border: 1px solid #d9534f;
-    background-color: #f8d7da;
-    color: #721c24;
-    position: relative;
-    border-radius: 5px;
-    width: fit-content;
-    font-size: x-small;
-        }
-        .flash-message.show {
-            display: block; /* Mostrar cuando se agrega la clase 'show' */
-        }
-        .flash-message.fade {
-            opacity: 0; /* Aplicar fade out */
-            transition: opacity 0.5s ease-out;
-        }
-        .flash-message .close-btn {
-    background: transparent;
-    border: none;
-    position: absolute;
-    right: 0px;
-    bottom: 20px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 1.2em;
-        }
-
-
-</style>
 
 <body>
     <header class="fixed-top">
         <nav class="navbar navbar-expand-lg navbar-custom">
             <div class="container-fluid">
                 <!-- Logo and Brand -->
-                <a class="navbar-brand d-flex align-items-center" href="#">
+                <a class="navbar-brand d-flex align-items-center" href="{{url_for('home')}}">
                     <img src="https://img.icons8.com/pulsar-color/96/nails.png" alt="Logo" />
                     <span class="ms-2 fw-bold">NailsPro</span>
                 </a>
@@ -273,22 +52,22 @@
     </div>
 
     <main>
-  <!-- mensaje de error usuario o contraseñas incorrectas -->
-  {% with messages = get_flashed_messages(with_categories=true) %}
+        <!-- mensaje de error usuario o contraseñas incorrectas -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
-            <div>
-                {% for category, message in messages %}
-                    <div class="flash-message alert alert-{{ category }}">
-                        {{ message }}
-                        <!-- boton de cierre bootstrap -->
-                        <button type="button" class="close-btn" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                {% endfor %}
+        <div>
+            {% for category, message in messages %}
+            <div class="flash-message alert alert-{{ category }}">
+                {{ message }}
+                <!-- boton de cierre bootstrap -->
+                <button type="button" class="close-btn" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
+            {% endfor %}
+        </div>
         {% endif %}
-    {% endwith %}
+        {% endwith %}
 
         <!-- Login Form -->
         <div class="login-container" id="login-container">
@@ -339,28 +118,28 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
     <!-- Flash Messages oculta msj tras 5 segundos. -->
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-        // Mostrar el mensaje flash
-        const flashMessage = document.querySelector('.flash-message')
-        if (flashMessage) {
-            flashMessage.classList.add('show')
-            // Ocultar después de 5 segundos (5000 milisegundos)
-            setTimeout(function() {
-                flashMessage.classList.remove('show')
-                flashMessage.classList.add('fade')
-            }, 5000)
-        }
+        document.addEventListener("DOMContentLoaded", function () {
+            // Mostrar el mensaje flash
+            const flashMessage = document.querySelector('.flash-message')
+            if (flashMessage) {
+                flashMessage.classList.add('show')
+                // Ocultar después de 5 segundos (5000 milisegundos)
+                setTimeout(function () {
+                    flashMessage.classList.remove('show')
+                    flashMessage.classList.add('fade')
+                }, 3600)
+            }
 
-        // Añadir evento de clic al botón de cierre
-        const closeButton = document.querySelector('.flash-message .close-btn')
-        if (closeButton) {
-            closeButton.addEventListener('click', function() {
-                flashMessage.classList.remove('show')
-                flashMessage.classList.add('fade')
-            })
-        }
-    })
- 
+        //Añadir evento de clic al botón de cierre
+            const closeButton = document.querySelector('.flash-message .close-btn')
+            if (closeButton) {
+                closeButton.addEventListener('click', function () {
+                    flashMessage.classList.remove('show')
+                    flashMessage.classList.add('fade')
+                })
+            }
+        })
+
     </script>
 </body>
 

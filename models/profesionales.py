@@ -42,13 +42,13 @@ class Profesional:
         return turnos
    
    @staticmethod
-   def agregar_turno(mysql,profesional_id,fecha, hora_inicio,  cliente_id, reservado, estado,servicio):
+   def agregar_turno(mysql,profesional_id,fecha, hora_inicio,  cliente_id, reservado, estado,servicio,metodo_pago):
            # Lógica para agregar el turno a la base de datos
     try:
         # Realiza la inserción en la base de datos
      cur = mysql.connection.cursor()
-     cur.execute("INSERT INTO horarios_trabajo (profesional_id,fecha, hora_inicio,  cliente_id, reservado, estado, servicio) VALUES (%s, %s, %s, %s, %s, %s, %s)",
-     (profesional_id,fecha, hora_inicio,  cliente_id, reservado, estado, servicio))
+     cur.execute("INSERT INTO horarios_trabajo (profesional_id,fecha, hora_inicio,  cliente_id, reservado, estado, servicio,metodo_pago) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)",
+     (profesional_id,fecha, hora_inicio,  cliente_id, reservado, estado, servicio,metodo_pago))
         # Confirma la transacción
      mysql.connection.commit()
         # Cierra el cursor

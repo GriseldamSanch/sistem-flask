@@ -369,7 +369,7 @@
    
     <div class="turno-container">
         <p class="title-reservar">Reserva el tuyo</p>
-                <!-- formulario de reservar turno -->
+                <!--* formulario de reservar turno -->
                 <form method="POST" action="{{ url_for('calendar_profesional', profesional_id=profesional_id,turnos=turnos) }}" class="turno-form">
                     <input type="date" id="fecha" name="fecha" required>
                     <br>
@@ -402,6 +402,14 @@
                         <option value="service">service</option>
                         <option value="pedicuria">Pedicuria</option>
                     </select>
+                    <br>
+                   <label for="metodo_pago">Método de Pago <img width="24" height="24" src="https://img.icons8.com/color/48/credit-card-interest.png" alt="credit-card-interest"/></label>
+                   <select name="metodo_pago" id="metodo_pago" required>
+                   <option value="efectivo">Efectivo en el local</option>
+                   <option value="debito">Débito</option>
+        
+    </select>
+    <br>
                         <button type="submit">Reservar Turno</button>
                 </form>
     </div>

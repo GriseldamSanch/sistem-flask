@@ -122,13 +122,7 @@ def eliminar_profesional():
         return redirect(url_for('getProfesionalesAdmin'))
     
 
-
-def allowed_file(filename):
-    ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-        
-        
-        
+       
 # TODO RUTA VER PROFESIONALES 
 @app.route('/profesionales', methods=['GET'])
 def getProfesionales():
@@ -145,6 +139,7 @@ def calendar_profesional(profesional_id):
         fecha = request.form['fecha']
         hora_inicio = request.form['hora']
         servicio = request.form['servicio']
+        metodo_pago = request.form['metodo_pago']
     #*--------------------------------------------------
         #*--------validacion fecha----------------------
         cur = mysql.connection.cursor()
@@ -157,8 +152,8 @@ def calendar_profesional(profesional_id):
         #*---------------------------------------------
         # ID del cliente desde la sesión
         cliente_id = session.get('cliente_id') #! de clase Profesional
-        #*----insercion de datos del formulario a la base de datos
-        if Profesional.agregar_turno(mysql, profesional_id, fecha, hora_inicio, cliente_id, 1, 'reservado', servicio):
+        #*----reserva de turno
+        if Profesional.agregar_turno(mysql, profesional_id, fecha, hora_inicio, cliente_id, 1, 'reservado', servicio,metodo_pago):
             flash('Turno reservado con éxito', 'success')
         else:
             flash('Hubo un error al reservar el turno', 'error')

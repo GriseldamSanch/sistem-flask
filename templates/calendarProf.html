@@ -310,7 +310,7 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link">hola, {{ session['nombre'] }}</a>
+                            <a class="nav-link" href="{{ url_for('turnos_cliente') }}">hola, {{ session['nombre'] }}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('logout') }}"><img width="24" height="24"

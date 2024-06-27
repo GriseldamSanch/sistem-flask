@@ -197,18 +197,24 @@ def new_cliente():
             #* Creacion de nuevo cliente
             nuevo_cliente = Cliente(nombre, email, telefono, password) #!de la clase Cliente
             #*------ insercion del nuevo cliente a la bd-----------
-            cur = mysql.connection.cursor() #llamado a la base de datos
-            cur.execute("INSERT INTO clientes (nombre, email, telefono, password) VALUES (%s, %s, %s, %s)", (nombre, email, telefono, password))#consulta sql
-            mysql.connection.commit()# confirmacion del sql
-            # Obtener el ID del cliente recién insertado
-            nuevo_cliente_id = cur.lastrowid
-            cur.close() #cierre 
-            flash('Registro exitoso, inicia sesion', 'success')  # Añade el mensaje flash
-            return redirect(url_for('new_cliente'))  # Redirige a la misma página para mostrar el mensaje
+            if nuevo_cliente.nuevo_cliente(mysql,nombre,email,telefono,password):
+                flash('Registro exitoso, inicia sesion', 'success')  # Añade el mensaje flash
+                return redirect(url_for('new_cliente'))  # Redirige a la misma página para mostrar el mensaje
             #*-----------------------------------------------------
     return render_template('new-cliente.html')
     
-   
+
+# TODO NUEVA RUTA VER TURNOS Y CANCELAR TURNOS DE CLIENTE
+@app.route('/cliente_turnos',methods=['GET', 'POST'])
+def turnos_cliente():
+    cliente_id = session.get("cliente_id")
+    if cliente_id:
+        turno_cliente = Cliente.get_turnos(mysql, cliente_id)
+    else:
+        turno_cliente = []
+    return render_template("turnos_cliente.html", turno_cliente=turno_cliente)
+
+
 
 
 

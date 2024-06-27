@@ -366,55 +366,105 @@
       </div>
       {% endif %}
       {% endwith %}
+
+<!-- Modal para mensaje de servicio fuera de servicio -->
+<div class="modal" id="fueraDeServicioModal" tabindex="-1" role="dialog" aria-labelledby="fueraDeServicioModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="fueraDeServicioModalLabel">Momentáneamente fuera de servicio</h5>
+                <button type="button" class="close" aria-label="Close" onclick="cerrarModal()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                El servicio está momentáneamente fuera de servicio. Por favor, intenta nuevamente más tarde.
+            </div>
+        </div>
+    </div>
+</div>
    
+<!-- div formulario de reservar turno -->
     <div class="turno-container">
         <p class="title-reservar">Reserva el tuyo</p>
                 <!--* formulario de reservar turno -->
-                <form method="POST" action="{{ url_for('calendar_profesional', profesional_id=profesional_id,turnos=turnos) }}" class="turno-form">
+                <form id="turnoForm" method="POST" action="{{ url_for('calendar_profesional', profesional_id=profesional_id, turnos=turnos) }}" class="turno-form">
                     <input type="date" id="fecha" name="fecha" required>
                     <br>
                     <label for="">Horarios disponibles</label>
-                    {% if profesional_id <= 6 %} 
+                    {% if profesional_id <= 6 %}
                     <select name="hora" id="hora">
                         <option value="08:00">08:00</option>
                         <option value="10:00">10:00</option>
                         <option value="12:00">12:00</option>
                     </select>
-                        {% else %}
+                    {% else %}
                     <select name="hora" id="hora">
-                            <option value="08:00">14:00</option>
-                            <option value="10:00">16:00</option>
-                            <option value="12:00">18:00</option>
+                        <option value="08:00">14:00</option>
+                        <option value="10:00">16:00</option>
+                        <option value="12:00">18:00</option>
                     </select>
-                        {% endif %}
-                        <br>
+                    {% endif %}
+                    <br>
                     <label for="servicio">Servicio</label>
                     <select name="servicio" id="servicio" required>
-                        <option value="">selecciona una opcion</option>
-                        <option value="semipermatente">semipermatente</option>
-                        <option value="Kapping gel">Kapping gel</option>
-                        <option value="uñas esculpidas + kapping gel">uñas esculpidas + kapping gel</option>
+                        <option value="">Selecciona una opción</option>
+                        <option value="semipermanente">Semipermanente</option>
+                        <option value="Kapping gel">Kapping Gel</option>
+                        <option value="uñas esculpidas + kapping gel">Uñas esculpidas + Kapping Gel</option>
                         <option value="full deco">Full Deco</option>
-                        <option value="nails art + uñas esculpidas">nails art + uñas esculpidas</option>
-                        <option value="esmalte semipermanente">esmalte semipermanente</option>
-                        <option value="manicuria rusa">manicuria rusa</option>
-                        <option value="retirado">retirado</option>
-                        <option value="service">service</option>
+                        <option value="nails art + uñas esculpidas">Nails Art + Uñas esculpidas</option>
+                        <option value="esmalte semipermanente">Esmalte Semipermanente</option>
+                        <option value="manicuria rusa">Manicuria Rusa</option>
+                        <option value="retirado">Retirado</option>
+                        <option value="service">Service</option>
                         <option value="pedicuria">Pedicuria</option>
                     </select>
                     <br>
-                   <label for="metodo_pago">Método de Pago <img width="24" height="24" src="https://img.icons8.com/color/48/credit-card-interest.png" alt="credit-card-interest"/></label>
-                   <select name="metodo_pago" id="metodo_pago" required>
-                   <option value="efectivo">Efectivo en el local</option>
-                   <option value="debito">Débito</option>
-        
-    </select>
-    <br>
-                        <button type="submit">Reservar Turno</button>
+                    <label for="metodo_pago">Método de Pago</label>
+                    <select name="metodo_pago" id="metodo_pago" onchange="manejarMetodoPago(this)">
+                        <option value="efectivo">Efectivo en el local</option>
+                        <option value="debito">Débito</option>
+                    </select>
+                    <br>
+                    <button type="submit">Reservar Turno</button>
                 </form>
-    </div>
+      </div>
+
+
+<script>
+// var esDebito = false;
+// function manejarMetodoPago(selectElement) {
+//     if (selectElement.value === 'debito') {
+//         esDebito = true;
+//         var modal = document.getElementById('fueraDeServicioModal');
+//         modal.style.display = 'block';
+
+//         // Cerrar automáticamente el modal después de 3 segundos
+//         setTimeout(function() {
+//             modal.style.display = 'none';
+//         }, 3000); // 3000 milisegundos = 3 segundos
+//     } else {
+//         esDebito = false;
+//     }
+// }
+
+// document.getElementById('turnoForm').addEventListener('submit', function(event) {
+//     if (esDebito) {
+//         event.preventDefault(); // Prevenir el envío del formulario si se selecciona débito
+//     }
+// });
+
+// function cerrarModal() {
+//     var modal = document.getElementById('fueraDeServicioModal');
+//     modal.style.display = 'none';
+// }
+</script>
+
+
 <!-- boton para volver -->
         <a href="{{ url_for('getProfesionales')}}" class="return-prof">return to Profesionales</a>
+
     </main>
     <!-- Footer -->
     <footer class="footer">
@@ -449,21 +499,48 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 
-    <script>
+<script>
         //limitar a partir de fecha actual 
-        document.addEventListener('DOMContentLoaded', (event) => {
+    document.addEventListener('DOMContentLoaded', (event) => {
     // Obtener la fecha actual
     let today = new Date().toISOString().split('T')[0]
-    document.getElementById('fecha').setAttribute('min', today)
-})
+    document.getElementById('fecha').setAttribute('min', today)})
 
-        //cierre de boton mensaje de error
-        const closeBtn = document.querySelector('.close-btn')
-        closeBtn.addEventListener('click', () => {
-            closeBtn.parentElement.style.display = 'none'
-        })
+    //cierre de boton mensaje de error
+    const closeBtn = document.querySelector('.close-btn')
+    closeBtn.addEventListener('click', () => {
+        closeBtn.parentElement.style.display = 'none'})
 
-    </script>
+//visualizacion del modal al seleccionar el metodo de pago debito.
+var esDebito = false;
+function manejarMetodoPago(selectElement) {
+    if (selectElement.value === 'debito') {
+        esDebito = true;
+        var modal = document.getElementById('fueraDeServicioModal');
+        modal.style.display = 'block';
+
+        // Cerrar automáticamente el modal después de 3 segundos
+        setTimeout(function() {
+            modal.style.display = 'none';
+        }, 3000); // 3000 milisegundos = 3 segundos
+    } else {
+        esDebito = false;
+    }
+}
+
+document.getElementById('turnoForm').addEventListener('submit', function(event) {
+    if (esDebito) {
+        event.preventDefault(); // Prevenir el envío del formulario si se selecciona débito
+    }
+});
+
+function cerrarModal() {
+    var modal = document.getElementById('fueraDeServicioModal');
+    modal.style.display = 'none';
+}
+
+
+</script>
 
 </body>
 </html>

@@ -237,15 +237,6 @@ def turnos_cliente():
 
 
 
-
-
-
-
-
-
-
-
-
 if __name__ == '__main__':
     app.run(debug=True)  # debug= true para que el servidor se reinicie cada vez que cambia el código.
 

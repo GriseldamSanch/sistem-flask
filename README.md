@@ -4,6 +4,9 @@
 
 * Framework : Flask
 * Data Base : MySQL
+* Conexion DB : flask_mysqldb
+
+
 
 
 ##### 19/06
@@ -22,9 +25,6 @@ se modifica la ruta calendar_profesional(profesional_id):
 se crea estilo para index.html
 se crea estilo para getPorfesionales.html
 
-
-
-####
 
 ##### 25/06
 fix  ---> en login no se muestra el mjs de error usuario/contraseña incorrectos. se muestra el msj en la ruta profesionales/id   ✔

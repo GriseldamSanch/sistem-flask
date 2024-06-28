@@ -4,9 +4,6 @@ from datetime import datetime
 from flask import Flask, flash, redirect, render_template, request, session, url_for
 import config
 from flask_mysqldb import MySQL #paquete conexion de  MYSQL
-#seguridad de subida de archivos.
-from werkzeug.utils import secure_filename
-
 from models.clientes import Cliente
 from models.profesionales import Profesional
 from models.admin import Admin

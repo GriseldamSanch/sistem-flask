@@ -204,6 +204,21 @@
     document.getElementById('fecha').setAttribute('min', today)
 })
 
+// no permite elegir fines de semana
+document.addEventListener('DOMContentLoaded', function () {
+    const inputFecha = document.getElementById('fecha');
+
+    inputFecha.addEventListener('input', function () {
+        const diaSeleccionado = new Date(this.value).getDay();
+        
+        // Si el día es sábado (6) o domingo (0), limpia el valor
+        if (diaSeleccionado === 6 || diaSeleccionado === 0) {
+            alert('Los fines de semana no están permitidos.');
+            this.value = '';
+        }
+    });
+});
+
 //visualizacion del modal al seleccionar el metodo de pago debito.
 var esDebito = false
 function manejarMetodoPago(selectElement) {

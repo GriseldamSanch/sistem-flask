@@ -129,7 +129,7 @@ def eliminar_profesional():
 def getProfesionales():
     #instancia de la clase profesionales
     profesionales = Profesional.get_profesionales(mysql) #! de clase profesional
-    return render_template('getProfesionales.html',profesionales=profesionales)
+    return render_template('getprofesionales.html',profesionales=profesionales)
 
 
 #TODO  RUTA MOSTRAR DISPONIBILIDAD Y TURNOS POR PROFESIONAL

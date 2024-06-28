@@ -1,185 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- Bootstrap CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/style.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>NailsPro💅🏻</title>
 </head>
 <style>
-    /* fuentes */
-    @import url('https://fonts.googleapis.com/css2?family=Playwrite+AU+TAS:wght@100..400&family=Quicksand:wght@300..700&display=swap');
-
-    body, html {
-    height: 100%;
-    margin: 0;
-    font-family: "Quicksand", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: weight;
-    font-style: normal;
-}
-
-.bg-container {
-    /* Background image */
-    background-image: url('https://images.unsplash.com/photo-1544816135-b44f18b3c5d6?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-    /* Full height */
-    height: 70vh;
-    /* Center and scale the image nicely */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    /* Add the blur effect */
-    filter: blur(2px);
-}
-.content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: rgb(0, 0, 0);
-    text-align: center;
-}
-.overlay {
-    /* Full height */
-    height: 70vh;
-    /* Black background with opacity */
-    background-color: rgb(157 157 157 / 50%); /* Black see-through */
-    /* Centered */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-}
-    .navbar-custom {
-        background-color: #f8f9fa;
-        border-bottom: 1px solid #e7e7e7;
+    .bg-container {
+        /* Background image */
+        background-image: url('https://images.unsplash.com/photo-1574740601984-f8a432296f78?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+        /* Full height */
+        height: 70vh;
+        /* Center and scale the image nicely */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        /* Add the blur effect */
+        filter: blur(2px);
     }
-    .navbar-custom .navbar-brand img {
-        width: 40px;
-        height: 40px;
-    }
-    .navbar-custom .nav-link {
-        color: #333;
-        margin-right: 10px;
-    }
-   
-    .navbar-custom .nav-link:hover {
-        color: #f48fb1;
-    }
-    /* footer */
-    .footer {
-    background-color: #f8f9fa;
-    border-top: 1px solid #e7e7e7;
-    padding: 20px 0;
-}
-.footer .social-icons a {
-    color: #333;
-    margin: 0 10px;
-    font-size: 24px;
-}
-.footer .social-icons a:hover {
-    color: #f48fb1;
-}
-.footer .footer-logo img {
-    width: 40px;
-    height: 40px;
-}
-.footer .footer-logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.footer .footer-logo span {
-    margin-left: 10px;
-    font-size: 18px;
-    font-weight: bold;
-}
-.footer .copyright,
-.footer .credits {
-    text-align: center;
-    font-size: 14px;
-    margin-top: 10px;
-    color: #666;
-}
-.footer .credits {
-    font-size: 12px;
-    color: #777;
-}
-/* formulario registro */
-.register-container{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background: rgba(255, 255, 255, 0.8);
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: none;
-    max-width: 400px;
-    width: 100%;
-    margin: 5px auto;
-}
-
-.register-form{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.register-form h5 {
-    margin-bottom: 20px;
-    font-weight: bold;
-    text-align: center;
-}
-
-.register-form input[type="email"],
-.register-form input[type="password"],
-.register-form input[type="text"],
-.register-form input[type="tel"]{
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: none;
-    border-bottom: 1px solid #000000;
-    border-radius: 0;
-    background: transparent;
-    outline: none;
-}
-
-.register-form button {
-width: 120px;
-height: 48px;
-color: #000;
-background-color: rgba(255, 255, 255, 0);
-border: 1px solid #000;
-border-radius: 30px;
-margin-top: 13px;
-font-size: 13px;
-font-weight: 700;
-line-height: 16px;
-transition: all .555s;
-}
-
-.register-form button:hover {
-    background-color: #f48fb1;
-}
-
-.link-register {
-    display: block;
-    text-align: center;
-    margin-top: 20px;
-    color: black;
-    text-decoration: none;
-}
-
-.link-register:hover {
-    text-decoration: underline;
-}
-
 </style>
 
 <body>
@@ -188,12 +30,13 @@ transition: all .555s;
         <nav class="navbar navbar-expand-lg navbar-custom">
             <div class="container-fluid">
                 <!-- Logo and Brand -->
-                <a class="navbar-brand d-flex align-items-center" href="#">
-                    <img src="https://img.icons8.com/pulsar-color/96/nails.png" alt="Logo"/>
+                <a class="navbar-brand d-flex align-items-center" href="{{url_for('home')}}">
+                    <img src="https://img.icons8.com/pulsar-color/96/nails.png" alt="Logo" />
                     <span class="ms-2 fw-bold">NailsPro</span>
                 </a>
                 <!-- Toggler/collapsible Button -->
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <!-- Navbar links -->
@@ -203,99 +46,85 @@ transition: all .555s;
                             <a class="nav-link" href="{{ url_for('login') }}">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link register-btn" href="{{ url_for('new_cliente') }}" >Register</a>
+                            <a class="nav-link" href="{{url_for('admin_login')}}">Login Admin</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('logout') }}"><img width="24" height="24" src="https://img.icons8.com/material-sharp/48/exit.png" alt="exit"/>Logout</a>
+                            <a class="nav-link register-btn" href="{{ url_for('new_cliente') }}">Register</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-<!-- Background Container -->
-<div class="bg-container"></div>
-<!-- Overlay Container -->
-<div class="overlay">
-<div class="content">
-    <h1>Welcome to NailsPro</h1>
-    <p>the art of manicure</p>
-</div>
-</div>
- <!-- d-flex centra el contenedor -->
-            <main>
-                <div class="register-container">
-                     <!-- formulario -->
-                            <!-- action="/new-cliente  en esa ruta se envia los datos" -->
-                            <form action="/new-cliente" method="post" class="register-form">
-                                <h5 class="text-center">Regístrate</h5>
-                                <!-- Campo nombre de usuario -->
-                                
-                                <input type="text" name="nombre" placeholder="Nombre o usuario" required>
-                                <!-- Campo email -->
-                                
-                                <input type="email" name="email" placeholder="Email" required>
-                                
-                                <!-- Campo teléfono -->
-                                
-                                <input type="tel"  name="telefono" placeholder="(011)____-____" required>
-                                
-                                <!-- Campo contraseña -->
+    <!-- Background Container -->
+    <div class="bg-container"></div>
+    <!-- Overlay Container -->
+    <div class="overlay">
+        <div class="content">
+            <h1>Welcome to NailsPro</h1>
+            <p>the art of manicure</p>
+        </div>
+    </div>
 
-                                <input type="password"  name="password" placeholder="Contraseña" required>
-                                {% if message %}
-                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                    <!-- mensaje: Usuario o contraseña incorrectos -->
-                                    <strong>Error</strong> {{message}}
-                                    <!-- Botón cerrar -->
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                </div>
-                                {% endif %}
-
-                                <!-- Botón -->
-                                <button type="submit">Acceder</button>
-                            </form>
-
-                </div>
-                  
-                <!-- contenedor principal -->
-                <!-- <div class="container-fluid row m-0 vh-100 justify-content-center align-items-center">
-                    <div class="card shadow w-50">
-                        <div class="card-body">
-                        </div
-                    </div>
-                </div> -->
-            </main>
-
+    <main>
         <!-- Mostrar mensajes flash -->
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
-            <div class="alert alert-success alert-dismissible fade show w-40" role="alert">
-                {% for category, message in messages %}
-                    <strong>{{ message }}</strong>
-                {% endfor %}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
+        <div class="alert alert-success alert-dismissible fade show w-40 msj-flash" role="alert">
+            {% for category, message in messages %}
+            <strong>{{ message }}</strong>
+            {% endfor %}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
         {% endif %}
-    {% endwith %}
+        {% endwith %}
 
- <!-- Footer -->
+        <div class="register-container">
+            <!-- formulario -->
+            <form action="/new-cliente" method="post" class="register-form">
+                <h5 class="text-center"><img width="16" height="16" src="https://img.icons8.com/tiny-color/16/user.png"
+                        alt="user" /> Regístrate</h5>
+                <!-- Campo nombre de usuario -->
+                <input type="text" name="nombre" placeholder="Nombre o usuario" required>
+                <!-- Campo email -->
+                <input type="email" name="email" placeholder="Email" required>
+                <!-- Campo teléfono -->
+                <input type="tel" name="telefono" placeholder="(011)____-____" required>
+                <!-- Campo contraseña -->
+                <input type="password" name="password" placeholder="Contraseña" required>
+                {% if message %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <!-- mensaje: Usuario o contraseña incorrectos -->
+                    <strong>Error</strong> {{message}}
+                    <!-- Botón cerrar -->
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endif %}
+                <!-- Botón -->
+                <button type="submit">Registrate</button>
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer -->
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="row">
                 <!-- Logo -->
                 <div class="col-md-4 d-flex justify-content-center mb-3 mb-md-0 footer-logo">
-                    <img src="https://img.icons8.com/pulsar-color/96/nails.png" alt="Logo"/>
+                    <img src="https://img.icons8.com/pulsar-color/96/nails.png" alt="Logo" />
                     <span>NailsPro</span>
                 </div>
                 <!-- Social Icons -->
                 <div class="col-md-4 d-flex justify-content-center mb-3 mb-md-0 social-icons">
                     <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                        <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/github.png" alt="github"/>
+                        <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/github.png"
+                            alt="github" />
                     </a>
                     <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-                        <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/linkedin.png" alt="linkedin"/>
+                        <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/linkedin.png"
+                            alt="linkedin" />
                     </a>
                 </div>
                 <!-- Copyright and Credits -->
@@ -305,10 +134,11 @@ transition: all .555s;
                 </div>
             </div>
         </div>
-    </footer>   
-       <!-- Bootstrap JS -->
-       <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
-       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    </footer>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 
 </body>
+
 </html>

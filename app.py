@@ -191,7 +191,14 @@ def new_cliente():
         telefono = request.form.get('telefono')
         password = request.form.get('password')
     #* -----------------------------------------------------------------
-        if nombre and email and telefono and password: # si todos los campos estan completos
+        if nombre and email and telefono and password:
+            """consulta para comprobar si el usuario ya existe"""
+            cursor = mysql.connection.cursor()
+            cursor.execute("SELECT * FROM clientes WHERE email = %s", (email,))
+            usuario_existente = cursor.fetchone()
+            if usuario_existente:
+                flash('El email ya está registrado. Por favor, intenta con otro email.', 'warning')
+                return redirect(url_for('new_cliente'))
             #* Creacion de nuevo cliente
             nuevo_cliente = Cliente(nombre, email, telefono, password) #!de la clase Cliente
             #*------ insercion del nuevo cliente a la bd-----------

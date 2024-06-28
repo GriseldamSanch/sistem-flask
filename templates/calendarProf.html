@@ -160,33 +160,8 @@
                     <button type="submit">Reservar Turno</button>
                 </form>
       </div>
-
-
-<script>
-    
-document.addEventListener('DOMContentLoaded', (event) => {
-    // Selecciona todos los mensajes flash
-    const flashMessages = document.querySelectorAll('.flash-message');
-
-    flashMessages.forEach((msg) => {
-        // Cierra el mensaje después de 5 segundos
-        setTimeout(() => {
-            msg.classList.add('hide');
-            // Elimina el mensaje del DOM después de que la transición haya terminado
-            setTimeout(() => {
-                msg.remove();
-            }, 500); // Tiempo de espera para completar la transición
-        }, 5000); // 5000ms = 5 segundos
-
-  });
- });
-
-</script>
-
-
 <!-- boton para volver -->
         <a href="{{ url_for('getProfesionales')}}" class="return-prof">return to Profesionales</a>
-
     </main>
     <!-- Footer -->
     <footer class="footer">
@@ -226,7 +201,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
     document.addEventListener('DOMContentLoaded', (event) => {
     // Obtener la fecha actual
     let today = new Date().toISOString().split('T')[0]
-    document.getElementById('fecha').setAttribute('min', today)})
+    document.getElementById('fecha').setAttribute('min', today)
+})
+
 
     document.addEventListener('DOMContentLoaded', (event) => {
     // Selecciona todos los mensajes flash

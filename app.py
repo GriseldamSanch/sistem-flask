@@ -163,12 +163,14 @@ def calendar_profesional(profesional_id):
 
         #*--------------------------------------------------
     #*---- Obtén los turnos del profesional
-    turnos = Profesional.obtener_turnos(mysql,profesional_id) #!de clase Profesional
+    # turnos = Profesional.obtener_turnos(mysql,profesional_id) #!de clase Profesional
     profName = Profesional.obtener_por_id(mysql,profesional_id).nombre #!de clase Profesional
     #*----------------------------------------
     #!-----------------------test
     mes = Profesional.mes_turnos(mysql,profesional_id)
-    #*-----renderiza la plantilla calendarProf.html
+    if mes == []:
+        flash('No hay turnos para este mes', 'warning')
+
     return render_template('calendarProf.html', profesional_id=profesional_id, mes=mes,profName=profName)
 
 

@@ -61,7 +61,7 @@ class Profesional:
    def mes_turnos(mysql,profesional_id):
      today = date.today()
      first_day = today.replace(day=1)
-     last_day = (today.replace(month=today.month % 12 + 1, day=1) -     timedelta(days=1))
+     last_day = (today.replace(month=today.month % 12 + 1, day=1) - timedelta(days=1))
      cur = mysql.connection.cursor()
      cur.execute("""
                  SELECT * FROM horarios_trabajo
@@ -69,5 +69,10 @@ class Profesional:
                  ORDER BY fecha, hora_inicio
                  """, (profesional_id, first_day, last_day))
      turnos = cur.fetchall()
+     print(len(turnos))
      cur.close()
-     return turnos
+     if len(turnos) == 0:
+        return []
+     else:
+        return turnos
+

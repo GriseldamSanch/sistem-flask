@@ -85,17 +85,17 @@
         </div>
         {% endfor %}
     </div>
-      <!-- mensaje flash ya existe turno en esa fecha -->
-      {% with messages = get_flashed_messages(with_categories=true) %}
-      {% if messages %}
-      <div>
-          {% for category, message in messages %}
-          <div class="flash-message alert alert-{{ category }}">{{ message }}
-          </div>
-          {% endfor %}
-      </div>
-      {% endif %}
-      {% endwith %}
+         <!-- Mostrar mensajes flash -->
+         {% with messages = get_flashed_messages(with_categories=true) %}
+         {% if messages %}
+         <div class="alert alert-light alert-dismissible fade show w-40 msj-flash" role="alert">
+             {% for category, message in messages %}
+             <strong>{{ message }}</strong>
+             {% endfor %}
+             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+         </div>
+         {% endif %}
+         {% endwith %}
 
 <!-- Modal para mensaje de servicio fuera de servicio -->
 <div class="modal" id="fueraDeServicioModal" tabindex="-1" role="dialog" aria-labelledby="fueraDeServicioModalLabel" aria-hidden="true" style="display: none;">
@@ -204,38 +204,20 @@
     document.getElementById('fecha').setAttribute('min', today)
 })
 
-
-    document.addEventListener('DOMContentLoaded', (event) => {
-    // Selecciona todos los mensajes flash
-    const flashMessages = document.querySelectorAll('.flash-message');
-
-    flashMessages.forEach((msg) => {
-        // Cierra el mensaje después de 5 segundos
-        setTimeout(() => {
-            msg.classList.add('hide')
-            // Elimina el mensaje del DOM después de que la transición haya terminado
-            setTimeout(() => {
-                msg.remove()
-            }, 500) // Tiempo de espera para completar la transición
-        }, 5000) // 5000ms = 5 segundos
-
-  })
- })
-
 //visualizacion del modal al seleccionar el metodo de pago debito.
-var esDebito = false;
+var esDebito = false
 function manejarMetodoPago(selectElement) {
     if (selectElement.value === 'debito') {
-        esDebito = true;
-        var modal = document.getElementById('fueraDeServicioModal');
+        esDebito = true
+        var modal = document.getElementById('fueraDeServicioModal')
         modal.style.display = 'block'
 
         // Cerrar automáticamente el modal después de 3 segundos
         setTimeout(function() {
             modal.style.display = 'none'
-        }, 3000); // 3000 milisegundos = 3 segundos
+        }, 3000)// 3000 milisegundos = 3 segundos
     } else {
-        esDebito = false;
+        esDebito = false
     }
 }
 

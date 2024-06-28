@@ -103,7 +103,7 @@ def getProfesionalesAdmin():
        #agregar profesional
         new_prof = Admin.agregar_profesional(mysql, nombre, especialidad, disponibilidad, servicio_especial,especialidad_img)
         if new_prof:
-            flash('Profesional agregado exitosamente.')
+            flash('Profesional agregado de forma exitosa.')
             return redirect(url_for('getProfesionalesAdmin'))
         else:
             flash('Error al agregar el profesional.')
@@ -118,7 +118,7 @@ def eliminar_profesional():
         profesional_id = request.form.get('profesional_id')
         delete = Admin.eliminar_profesional(mysql, profesional_id)
         if delete:
-            flash('Profesional eliminado exitosamente', 'success')
+            flash('Profesional eliminado', 'success')
         else:
             flash('Error al eliminar profesional', 'danger')
         return redirect(url_for('getProfesionalesAdmin'))

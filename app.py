@@ -12,6 +12,8 @@ from models.admin import Admin
 #*                                        app y su conexion la DB                                          
 #--------------------------------------------------------------------------------------------------------------------------
 
+
+
 app = Flask(__name__) # app instancia de Flask
 mysql = MySQL(app) #conexion de app a la base de datos
 

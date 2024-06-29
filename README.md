@@ -6,5 +6,8 @@
 * Data Base : MySQL
 * Conexion DB : flask_mysqldb
 
+Ingreso como administrador
+* usuario admin@admin
+* password 1234
 
 Descripción: Sistema que permite a los clientes reservar y cancelar turnos con profesionales,el administrador gestionan los datos de profesionales.
